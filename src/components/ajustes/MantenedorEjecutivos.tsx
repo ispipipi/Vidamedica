@@ -8,7 +8,7 @@ export function MantenedorEjecutivos() {
   const [form, setForm] = useState({
     nombre: '',
     iniciales: '',
-    rol: 'Analista Implementación',
+    rol: 'Licitador',
     perfil: 'artbpo_ejecutivo' as const,
     color: '#22c55e',
   });

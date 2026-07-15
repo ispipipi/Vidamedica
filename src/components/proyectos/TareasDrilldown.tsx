@@ -526,7 +526,7 @@ export function TareasDrilldown({ tareas, showProjectLevel = true, query = '', s
               </div>
               <h4 className="line-clamp-2 text-sm font-semibold text-white transition group-hover:text-emerald-100">{tarea.nombre}</h4>
               <p className="mt-1 truncate text-xs text-slate-400">
-                {showProjectLevel ? null : <span>{proyecto?.nombre ?? 'Proyecto'} · </span>}
+                {showProjectLevel ? null : <span>{proyecto?.nombre ?? 'Licitacion'} · </span>}
                 {tarea.responsable}
               </p>
               {reasignacionPendiente && tarea.reasignacionPendiente ? (

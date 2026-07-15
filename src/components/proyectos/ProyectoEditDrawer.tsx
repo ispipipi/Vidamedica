@@ -56,7 +56,7 @@ export function ProyectoEditDrawer({ proyecto, onClose }: Props) {
   };
 
   return (
-    <Drawer open={!!proyecto} title="Editar proyecto" onClose={onClose}>
+    <Drawer open={!!proyecto} title="Editar licitacion" onClose={onClose}>
       <div className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="grid gap-2 text-sm text-slate-300 sm:col-span-2">

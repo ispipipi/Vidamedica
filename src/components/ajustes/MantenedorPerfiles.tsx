@@ -6,7 +6,7 @@ import { GlassCard } from '../ui/GlassCard';
 
 const accesoLabels: Array<{ key: keyof AccesosPerfil; label: string }> = [
   { key: 'puedeAdministrar', label: 'Administrar sistema' },
-  { key: 'puedeEditarProyectos', label: 'Editar proyectos' },
+  { key: 'puedeEditarProyectos', label: 'Editar licitaciones' },
   { key: 'puedeEditarDatosTarea', label: 'Editar datos de tareas' },
   { key: 'puedeCambiarEstadoTarea', label: 'Cambiar estado/comentar tareas' },
   { key: 'puedeVerGanttAdmin', label: 'Gantt admin' },

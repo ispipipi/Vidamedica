@@ -125,8 +125,8 @@ export function Header() {
               LC
             </div>
             <div className="min-w-0 text-left">
-              <p className="truncate text-base font-semibold text-white sm:text-lg">LICITATOR</p>
-              <p className="text-xs text-slate-500">Vida Medica - Gestion de Licitaciones</p>
+              <p className="truncate text-xl font-bold tracking-tight text-white sm:text-2xl">LICITATOR</p>
+              <p className="text-[11px] uppercase tracking-[0.16em] text-slate-500">Vida Medica</p>
             </div>
           </button>
 
@@ -136,7 +136,7 @@ export function Header() {
                 <Search className="h-4 w-4 shrink-0 text-slate-500" />
                 <input
                   className="w-full bg-transparent text-sm text-white outline-none placeholder:text-slate-500"
-                  placeholder="Buscar proyecto, tarea, cliente o responsable"
+                  placeholder="Buscar licitacion, tarea, cliente o responsable"
                   value={query}
                   onChange={(event) => {
                     setQuery(event.target.value);
@@ -168,7 +168,7 @@ export function Header() {
                     <div className="max-h-[70vh] overflow-y-auto p-2">
                       {resultados.proyectos.length ? (
                         <div className="mb-2">
-                          <p className="px-2 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-emerald-300">Proyectos</p>
+                          <p className="px-2 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-emerald-300">Licitaciones</p>
                           {resultados.proyectos.map((proyecto) => (
                             <button
                               key={`proyecto-${proyecto.id}`}
@@ -202,7 +202,7 @@ export function Header() {
                                 <div className="min-w-0">
                                   <p className="truncate text-sm font-semibold text-white">{tarea.nombre}</p>
                                   <p className="truncate text-xs text-slate-400">
-                                    {proyecto?.nombre ?? 'Proyecto'} · {fase?.codigo ? `${fase.codigo} · ` : ''}{tarea.responsable}
+                                    {proyecto?.nombre ?? 'Licitacion'} · {fase?.codigo ? `${fase.codigo} · ` : ''}{tarea.responsable}
                                   </p>
                                 </div>
                                 <span className="rounded-full border border-white/10 bg-white/[0.05] px-2 py-1 text-[11px] text-slate-300">
@@ -284,7 +284,7 @@ export function Header() {
         <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin">
             <button className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-300 hover:bg-white/8" onClick={() => setVista('proyectos')}>
               <BriefcaseBusiness className="h-4 w-4" />
-              Proyectos
+              Licitaciones
             </button>
             <button className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-300 hover:bg-white/8" onClick={() => setVista('mis_tareas')}>
               <ListTodo className="h-4 w-4" />

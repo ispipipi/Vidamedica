@@ -19,12 +19,12 @@ export function ProyectosList() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="text-sm uppercase tracking-[0.18em] text-emerald-300">Portafolio</p>
-          <h1 className="mt-2 text-3xl font-semibold text-white">Proyectos de implementación</h1>
+          <h1 className="mt-2 text-3xl font-semibold text-white">Licitaciones</h1>
         </div>
         {puedeEditarProyectos ? (
           <button className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-4 py-2 text-sm font-medium text-slate-200 hover:bg-white/8" onClick={() => setVista('ajustes')}>
             <Plus className="h-4 w-4" />
-            Nuevo proyecto
+            Nueva licitacion
           </button>
         ) : null}
       </div>

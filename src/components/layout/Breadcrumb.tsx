@@ -8,11 +8,11 @@ export function Breadcrumb() {
 
   const items = [
     { label: 'Dashboard', onClick: () => setVista('dashboard') },
-    vista === 'proyectos' ? { label: 'Proyectos', onClick: () => setVista('proyectos') } : null,
+    vista === 'proyectos' ? { label: 'Licitaciones', onClick: () => setVista('proyectos') } : null,
     proyecto ? { label: proyecto.nombre, onClick: () => setVista('proyecto', proyecto.id) } : null,
     fase ? { label: fase.codigo, onClick: () => setVista('fase', proyecto?.id, fase.id) } : null,
     vista === 'mis_tareas' ? { label: 'Mis tareas', onClick: () => setVista('mis_tareas') } : null,
-    vista === 'info_cliente' ? { label: 'Info cliente', onClick: () => setVista('info_cliente', proyecto?.id) } : null,
+    vista === 'info_cliente' ? { label: 'Info organismo', onClick: () => setVista('info_cliente', proyecto?.id) } : null,
     vista === 'gantt_admin' ? { label: 'Gantt admin', onClick: () => setVista('gantt_admin') } : null,
     vista === 'ajustes' ? { label: 'Ajustes', onClick: () => setVista('ajustes') } : null,
   ].filter(Boolean) as Array<{ label: string; onClick: () => void }>;

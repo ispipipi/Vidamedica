@@ -228,7 +228,7 @@ export function AlertPanel() {
                   {alerta.mensaje}
                 </button>
                 <div className="mt-2 flex items-center justify-between gap-3 text-xs text-slate-500">
-                  <span className="truncate">{proyecto?.nombre ?? 'Proyecto'}</span>
+                  <span className="truncate">{proyecto?.nombre ?? 'Licitacion'}</span>
                   <button className="inline-flex items-center gap-1 text-emerald-300 hover:text-emerald-200" onClick={() => marcarAlertaLeida(alerta.id)}>
                     <Check className="h-3.5 w-3.5" />
                     Leída

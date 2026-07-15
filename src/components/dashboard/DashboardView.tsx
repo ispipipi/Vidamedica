@@ -33,7 +33,7 @@ type KpiStat = {
 };
 
 const kpiTitles: Record<KpiDetalle, string> = {
-  proyectos: 'Proyectos activos',
+  proyectos: 'Licitaciones activas',
   completadas: 'Tareas completadas',
   en_proceso: 'Tareas en proceso',
   alertas: 'Alertas abiertas',
@@ -89,7 +89,7 @@ export function DashboardView() {
                 <p className="text-sm uppercase tracking-[0.18em] text-emerald-300">Vista cliente</p>
                 <h1 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">{proyectoCliente.nombre}</h1>
                 <p className="mt-3 max-w-2xl text-slate-400">
-                  Avance de implementacion de tu empresa y cumplimiento por fase. Puedes entrar a cada fase para revisar las tareas asociadas.
+                  Avance de tus licitaciones y cumplimiento por fase. Entra a cada fase para revisar las tareas asociadas.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <button className="inline-flex items-center gap-2 rounded-lg bg-emerald-400 px-4 py-2 font-semibold text-slate-950 hover:bg-emerald-300" onClick={() => setVista('proyecto', proyectoCliente.id)}>
@@ -130,7 +130,7 @@ export function DashboardView() {
           <div className="space-y-4">
             <div>
               <p className="text-sm uppercase tracking-[0.18em] text-emerald-300">Cumplimiento por fase</p>
-              <h2 className="mt-2 text-2xl font-semibold text-white">Fases de implementacion</h2>
+              <h2 className="mt-2 text-2xl font-semibold text-white">Fases de la licitacion</h2>
             </div>
             <div className="grid gap-4 md:grid-cols-2">
               {fasesProyecto.map((fase) => {
@@ -183,7 +183,7 @@ export function DashboardView() {
   const proyectosActivos = proyectos.filter((p) => p.estado === 'activo');
 
   const stats: KpiStat[] = [
-    { id: 'proyectos', label: 'Proyectos activos', value: proyectosActivos.length, icon: FolderKanban },
+    { id: 'proyectos', label: 'Licitaciones activas', value: proyectosActivos.length, icon: FolderKanban },
     { id: 'completadas', label: 'Tareas completadas', value: tareasVisibles.filter((t) => t.estado === 'completada').length, icon: CheckCircle2 },
     { id: 'en_proceso', label: 'En proceso', value: tareasVisibles.filter((t) => t.estado === 'en_proceso').length, icon: Clock3 },
     { id: 'alertas', label: 'Alertas abiertas', value: alertasAbiertas.length, icon: AlertTriangle },
@@ -242,7 +242,7 @@ export function DashboardView() {
           <GlassCard className="overflow-hidden p-6 sm:p-8">
             <div className="grid gap-8 lg:grid-cols-[1fr_220px] lg:items-center">
               <div>
-                <p className="text-sm uppercase tracking-[0.18em] text-emerald-300">Monitoreo de implementaciones</p>
+                <p className="text-sm uppercase tracking-[0.18em] text-emerald-300">Monitoreo de licitaciones</p>
                 <h1 className="mt-3 max-w-3xl text-3xl font-semibold tracking-normal text-white sm:text-5xl">
                   LICITATOR controla checklist, plazos y estado de cada licitacion en una sola vista.
                 </h1>
@@ -447,7 +447,7 @@ function DashboardKpiDetalle({
         </div>
         <div className="rounded-lg border border-white/10 bg-white/[0.035] px-4 py-3 text-right">
           <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Nivel actual</p>
-          <p className="mt-1 font-semibold text-white">{fase ? 'Tareas' : proyecto ? 'Fases' : 'Proyectos'}</p>
+          <p className="mt-1 font-semibold text-white">{fase ? 'Tareas' : proyecto ? 'Fases' : 'Licitaciones'}</p>
         </div>
       </div>
 

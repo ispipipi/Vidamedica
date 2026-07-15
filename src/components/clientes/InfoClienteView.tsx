@@ -18,7 +18,7 @@ export function InfoClienteView() {
     <div className="space-y-6 animate-fade-in">
       <div>
         <p className="text-sm uppercase tracking-[0.18em] text-emerald-300">Ficha del cliente</p>
-        <h1 className="mt-2 text-3xl font-semibold text-white">Info cliente</h1>
+        <h1 className="mt-2 text-3xl font-semibold text-white">Info organismo</h1>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">

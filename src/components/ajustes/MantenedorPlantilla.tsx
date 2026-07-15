@@ -4,7 +4,7 @@ import { GlassCard } from '../ui/GlassCard';
 export function MantenedorPlantilla() {
   return (
     <GlassCard className="p-5">
-      <h2 className="mb-4 text-xl font-semibold text-white">Plantilla de implementación</h2>
+      <h2 className="mb-4 text-xl font-semibold text-white">Plantilla de fases</h2>
       <div className="grid gap-3">
         {PLANTILLA_FASES.map((fase) => (
           <div key={fase.codigo} className="rounded-lg border border-white/10 bg-white/[0.035] p-4">

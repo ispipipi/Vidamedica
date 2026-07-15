@@ -308,7 +308,7 @@ export function TareaEditDrawer({ tarea, onClose }: Props) {
             </div>
             <h3 className="text-xl font-semibold leading-tight text-white">{tareaActual?.nombre}</h3>
             {tareaActual?.descripcion ? <p className="mt-1 line-clamp-3 text-sm text-slate-400">{tareaActual.descripcion}</p> : null}
-            <p className="mt-2 truncate text-xs text-slate-500">{proyecto?.nombre ?? 'Proyecto'}</p>
+            <p className="mt-2 truncate text-xs text-slate-500">{proyecto?.nombre ?? 'Licitacion'}</p>
 
             <div className="mt-4 grid gap-2 sm:grid-cols-2">
               <div className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2">

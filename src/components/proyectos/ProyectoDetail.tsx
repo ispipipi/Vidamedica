@@ -66,12 +66,12 @@ export function ProyectoDetail() {
               {puedeEditarProyectos ? (
                 <button className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-200 hover:bg-white/8" onClick={() => setEditing(proyecto)}>
                   <Edit3 className="h-4 w-4" />
-                  Editar proyecto
+                  Editar licitacion
                 </button>
               ) : null}
               <button className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-200 hover:bg-white/8" onClick={() => setVista('info_cliente', proyecto.id)}>
                 <Building2 className="h-4 w-4" />
-                Info cliente
+                Info organismo
               </button>
             </div>
             <p className="mt-2 max-w-3xl text-slate-400">{proyecto.observaciones}</p>
