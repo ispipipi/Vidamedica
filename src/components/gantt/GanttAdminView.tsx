@@ -135,7 +135,7 @@ export function GanttAdminView() {
       const imported = parseGoogleSheetPlan(payload, proyectoId);
 
       if (!imported.tareas.length) {
-        throw new Error('La respuesta no contiene tareas validas. Revisa la pestaña IMPLEMENTATOR_DATA.');
+        throw new Error('La respuesta no contiene tareas validas. Revisa la pestaña LICITATOR_DATA.');
       }
 
       reemplazarPlanificacionProyecto(proyectoId, imported.fases, imported.tareas, usuarioActivo?.nombre ?? 'Administrador', {

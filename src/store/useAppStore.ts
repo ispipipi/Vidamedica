@@ -927,7 +927,7 @@ export const useAppStore = create<AppState>()(
       },
     }),
     {
-      name: 'implementator_state',
+      name: 'licitator_vidamedica_state',
       version: 3,
       merge: (persistedState, currentState) => {
         const persisted = persistedState as Partial<AppState> | undefined;

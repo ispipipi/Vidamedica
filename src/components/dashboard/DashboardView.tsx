@@ -244,7 +244,7 @@ export function DashboardView() {
               <div>
                 <p className="text-sm uppercase tracking-[0.18em] text-emerald-300">Monitoreo de implementaciones</p>
                 <h1 className="mt-3 max-w-3xl text-3xl font-semibold tracking-normal text-white sm:text-5xl">
-                  IMPLEMENTATOR controla avance, riesgos y go live en una sola vista.
+                  LICITATOR controla checklist, plazos y estado de cada licitacion en una sola vista.
                 </h1>
                 <p className="mt-4 max-w-2xl text-slate-400">
                   artBPO puede navegar desde el portafolio hasta cada fase y tarea, con alertas calculadas desde las fechas planificadas.

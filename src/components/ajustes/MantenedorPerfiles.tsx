@@ -70,7 +70,7 @@ export function MantenedorPerfiles() {
         </div>
         <div>
           <h2 className="text-xl font-semibold text-white">Mantenedor de perfiles</h2>
-          <p className="text-sm text-slate-500">Define el nombre del perfil y los accesos que tendrá dentro de IMPLEMENTATOR.</p>
+          <p className="text-sm text-slate-500">Define el nombre del perfil y los accesos que tendrá dentro de LICITATOR.</p>
         </div>
       </div>
 

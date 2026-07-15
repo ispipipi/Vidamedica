@@ -122,11 +122,11 @@ export function Header() {
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <button className="flex min-w-0 items-center gap-3" onClick={() => setVista('dashboard')}>
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-400/12 text-emerald-300 ring-1 ring-emerald-300/20">
-              IM
+              LC
             </div>
             <div className="min-w-0 text-left">
-              <p className="truncate text-base font-semibold text-white sm:text-lg">IMPLEMENTATOR</p>
-              <p className="text-xs text-slate-500">artBPO Software Implementation</p>
+              <p className="truncate text-base font-semibold text-white sm:text-lg">LICITATOR</p>
+              <p className="text-xs text-slate-500">Vida Medica - Gestion de Licitaciones</p>
             </div>
           </button>
 

@@ -45,7 +45,7 @@ export function LoginView() {
         const perfil = buscarPerfil(perfilesDisponibles, emailUsuario);
 
         if (!perfil) {
-          setMensaje('Tu usuario existe en Firebase, pero aun no tiene perfil asignado en IMPLEMENTATOR.');
+          setMensaje('Tu usuario existe en Firebase, pero aun no tiene perfil asignado en LICITATOR.');
           setUsuarioActivo(null);
           return;
         }
@@ -105,7 +105,7 @@ export function LoginView() {
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-400/12 text-emerald-300 ring-1 ring-emerald-300/20">
             <ShieldCheck className="h-6 w-6" />
           </div>
-          <p className="text-sm uppercase tracking-[0.18em] text-emerald-300">IMPLEMENTATOR</p>
+          <p className="text-sm uppercase tracking-[0.18em] text-emerald-300">LICITATOR</p>
           <h1 className="mt-2 text-2xl font-semibold text-white">Ingreso seguro</h1>
           <p className="mt-2 text-sm text-slate-400">Accede con tu email y contrasena asignada.</p>
         </div>
