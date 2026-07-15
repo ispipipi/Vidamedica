@@ -20,6 +20,7 @@ import { ProgressRing } from '../ui/ProgressRing';
 import { StatusBadge } from '../ui/StatusBadge';
 import { TrafficLightOrb } from '../ui/TrafficLightOrb';
 import { AlertPanel } from '../layout/AlertPanel';
+import { SincronizarGESButton } from '../proyectos/SincronizarGESModal';
 import { TareaEditDrawer } from '../proyectos/TareaEditDrawer';
 import { TaskStatusGroups } from '../proyectos/TareasDrilldown';
 
@@ -247,11 +248,12 @@ export function DashboardView() {
                   LICITATOR controla checklist, plazos y estado de cada licitacion en una sola vista.
                 </h1>
                 <p className="mt-4 max-w-2xl text-slate-400">
-                  artBPO puede navegar desde el portafolio hasta cada fase y tarea, con alertas calculadas desde las fechas planificadas.
+                  Vida Medica puede navegar desde el portafolio hasta cada fase y tarea, con alertas calculadas desde las fechas planificadas.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
+                  <SincronizarGESButton />
                   <button className="inline-flex items-center gap-2 rounded-lg bg-emerald-400 px-4 py-2 font-semibold text-slate-950 hover:bg-emerald-300" onClick={abrirProyectos}>
-                    Ver proyectos
+                    Ver licitaciones
                     <ArrowRight className="h-4 w-4" />
                   </button>
                   <button className="rounded-lg border border-white/10 px-4 py-2 font-medium text-slate-200 hover:bg-white/8" onClick={() => abrirModoAccion('atencion', 'criticas')}>

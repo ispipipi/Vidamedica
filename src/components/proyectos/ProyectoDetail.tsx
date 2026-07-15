@@ -33,6 +33,12 @@ export function ProyectoDetail() {
     }
   }, [proyectoActivoId, faseActivaId]);
 
+  useEffect(() => {
+    if (proyectoActivoId) {
+      useAppStore.getState().marcarProyectoVisto(proyectoActivoId);
+    }
+  }, [proyectoActivoId]);
+
   if (!proyecto) {
     return (
       <GlassCard className="p-6">

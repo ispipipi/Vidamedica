@@ -2,7 +2,7 @@ import { addDays, differenceInCalendarDays, differenceInDays, format, parseISO }
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { PLANTILLA_FASES } from '../data/plantillaFases';
-import { SEED_DATA } from '../data/seedData';
+import { SEED_DATA, PROYECTOS_PENDIENTES_SYNC } from '../data/seedData';
 import { PERFILES_ACCESO_SEED, PERFILES_SEED } from '../data/perfiles';
 import { GOOGLE_SHEETS_GANTT_URL } from '../data/googleSheetsSource';
 import { Alerta, AppState, ExpedienteProyecto, Fase, Tarea } from '../types';
@@ -159,6 +159,8 @@ export const useAppStore = create<AppState>()(
       tema: 'noche',
       fuenteGoogleSheetsUrl: GOOGLE_SHEETS_GANTT_URL,
       sincronizadoRemotoEn: undefined,
+      proyectosPendientesSyncCount: PROYECTOS_PENDIENTES_SYNC.length,
+      sincronizandoGES: false,
 
       setUsuarioActivo: (u) => set({ usuarioActivo: u }),
 
@@ -711,6 +713,45 @@ export const useAppStore = create<AppState>()(
         }));
         get().recalcularAlertas();
         guardarRemoto(get(), 'crear_proyecto');
+      },
+
+      sincronizarConGES: async () => {
+        if (get().sincronizandoGES) return { agregados: 0, nombres: [] };
+        set({ sincronizandoGES: true });
+        // Simula latencia real de conexion + lectura documental por IA
+        await new Promise((resolve) => setTimeout(resolve, 2600));
+
+        const pendientes = [...PROYECTOS_PENDIENTES_SYNC];
+        const yaCargados = new Set(get().proyectos.map((p) => p.numeroLicitacion));
+        const nuevos = pendientes.filter((item) => !yaCargados.has(item.proyecto.numeroLicitacion));
+
+        if (nuevos.length === 0) {
+          set({ sincronizandoGES: false });
+          return { agregados: 0, nombres: [] };
+        }
+
+        const ahora = new Date().toISOString();
+        const proyectosNuevos = nuevos.map((item) => ({ ...item.proyecto, creadoEn: ahora, nuevaDesdeSync: true }));
+        const fasesNuevas = nuevos.flatMap((item) => item.fases);
+        const tareasNuevas = nuevos.flatMap((item) => item.tareas);
+
+        set((s) => ({
+          proyectos: [...s.proyectos, ...proyectosNuevos],
+          fases: [...s.fases, ...fasesNuevas],
+          tareas: [...s.tareas, ...tareasNuevas],
+          proyectosPendientesSyncCount: Math.max(0, s.proyectosPendientesSyncCount - nuevos.length),
+          sincronizandoGES: false,
+        }));
+        get().recalcularAlertas();
+        guardarRemoto(get(), 'sincronizar_ges');
+
+        return { agregados: nuevos.length, nombres: proyectosNuevos.map((p) => p.nombre) };
+      },
+
+      marcarProyectoVisto: (proyectoId) => {
+        set((s) => ({
+          proyectos: s.proyectos.map((p) => (p.id === proyectoId && p.nuevaDesdeSync ? { ...p, nuevaDesdeSync: false } : p)),
+        }));
       },
 
       actualizarProyecto: (id, cambios) => {

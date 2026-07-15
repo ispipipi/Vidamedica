@@ -79,6 +79,7 @@ export interface Proyecto {
   estado: 'activo' | 'completado' | 'pausado';
   observaciones: string;
   creadoEn: string;
+  nuevaDesdeSync?: boolean;
 }
 
 export interface Fase {
@@ -221,6 +222,10 @@ export interface AppState {
   tema: TemaApp;
   fuenteGoogleSheetsUrl: string;
   sincronizadoRemotoEn?: string;
+  proyectosPendientesSyncCount: number;
+  sincronizandoGES: boolean;
+  sincronizarConGES: () => Promise<{ agregados: number; nombres: string[] }>;
+  marcarProyectoVisto: (proyectoId: string) => void;
   setUsuarioActivo: (u: UsuarioActivo | null) => void;
   setVista: (v: Vista, proyectoId?: string, faseId?: string) => void;
   setTareaActiva: (tareaId: string | null) => void;
