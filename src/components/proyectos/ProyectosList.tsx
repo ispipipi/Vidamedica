@@ -57,9 +57,9 @@ export function ProyectosList() {
                 <div className="mb-5 grid gap-3 text-sm text-slate-300">
                   <span className="inline-flex items-center gap-2">
                     <CalendarDays className="h-4 w-4 text-slate-500" />
-                    {proyecto.fechaInicio} a {proyecto.fechaGoLive}
+                    {proyecto.fechaPublicacion} a {proyecto.fechaCierre}
                   </span>
-                  <span>Sistema origen: {proyecto.sistemaOrigen}</span>
+                  <span>Estado: {proyecto.estadoLicitacion}</span>
                 </div>
 
                 <div className="mt-auto">

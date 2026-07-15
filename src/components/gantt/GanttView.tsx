@@ -15,6 +15,7 @@ const progressByState = {
   completada: 100,
   bloqueada: 20,
   cancelada: 0,
+  no_aplica: 100,
 };
 
 export function GanttView({ tareas }: Props) {

@@ -6,6 +6,7 @@ const labels: Record<EstadoTarea, string> = {
   completada: 'Completada',
   bloqueada: 'Bloqueada',
   cancelada: 'Cancelada',
+  no_aplica: 'No aplica',
 };
 
 const colors: Record<EstadoTarea, string> = {
@@ -14,6 +15,7 @@ const colors: Record<EstadoTarea, string> = {
   completada: 'bg-emerald-500/15 text-emerald-200 ring-emerald-400/20',
   bloqueada: 'bg-red-500/15 text-red-200 ring-red-400/20',
   cancelada: 'bg-zinc-500/15 text-zinc-300 ring-zinc-400/20',
+  no_aplica: 'bg-zinc-500/10 text-zinc-400 ring-zinc-400/10',
 };
 
 const dot: Record<EstadoTarea, string> = {
@@ -22,6 +24,7 @@ const dot: Record<EstadoTarea, string> = {
   completada: 'bg-emerald-400',
   bloqueada: 'bg-red-400',
   cancelada: 'bg-zinc-400',
+  no_aplica: 'bg-zinc-500',
 };
 
 export function StatusBadge({ estado, ping = false }: { estado: EstadoTarea; ping?: boolean }) {

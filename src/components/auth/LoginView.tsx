@@ -111,8 +111,26 @@ export function LoginView() {
         </div>
 
         {!firebaseReady ? (
-          <div className="rounded-lg border border-amber-300/20 bg-amber-300/10 p-4 text-sm text-amber-100">
-            {firebaseMissingMessage}
+          <div className="space-y-3">
+            <div className="rounded-lg border border-amber-300/20 bg-amber-300/10 p-4 text-sm text-amber-100">
+              {firebaseMissingMessage}
+            </div>
+            <div className="rounded-lg border border-emerald-300/20 bg-emerald-400/10 p-4">
+              <p className="mb-3 text-sm text-emerald-100">Modo demo (sin Firebase) - entra directo con un perfil de ejemplo:</p>
+              <div className="flex flex-col gap-2">
+                {perfiles.map((perfil) => (
+                  <button
+                    key={perfil.id}
+                    type="button"
+                    className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white hover:bg-white/10"
+                    onClick={() => setUsuarioActivo(perfil)}
+                  >
+                    <span>{perfil.nombre} · {perfil.rol}</span>
+                    <span className="text-xs text-slate-400">Entrar</span>
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         ) : (
           <form className="space-y-3" onSubmit={submit}>

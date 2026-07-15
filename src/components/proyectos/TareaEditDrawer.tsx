@@ -15,7 +15,7 @@ type Props = {
 
 type PanelAccionTarea = 'estado' | 'impedimento' | 'reasignacion';
 
-const estados: EstadoTarea[] = ['pendiente', 'en_proceso', 'completada', 'bloqueada', 'cancelada'];
+const estados: EstadoTarea[] = ['pendiente', 'en_proceso', 'completada', 'bloqueada', 'cancelada', 'no_aplica'];
 const estadoConfig: Record<EstadoTarea, { label: string; hint: string; icon: typeof CheckCircle2; active: string }> = {
   pendiente: {
     label: 'Pendiente',
@@ -46,6 +46,12 @@ const estadoConfig: Record<EstadoTarea, { label: string; hint: string; icon: typ
     hint: 'No aplica',
     icon: Ban,
     active: 'border-red-300/50 bg-red-400/15 text-red-100',
+  },
+  no_aplica: {
+    label: 'No aplica',
+    hint: 'Este item no aplica a esta licitacion',
+    icon: XCircle,
+    active: 'border-zinc-400/40 bg-zinc-400/10 text-zinc-300',
   },
 };
 

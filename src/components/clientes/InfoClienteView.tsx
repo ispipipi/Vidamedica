@@ -27,10 +27,10 @@ export function InfoClienteView() {
           const rows = [
             { label: 'RUT', value: info.rut, icon: IdCard },
             { label: 'Razon social', value: info.razonSocial, icon: Building2 },
-            { label: 'Representante legal', value: info.representanteLegal, icon: UserRound },
-            { label: 'Direccion', value: info.direccion, icon: MapPin },
-            { label: 'Caja de compensacion', value: info.cajaCompensacion, icon: ShieldCheck },
-            { label: 'Mutualidad', value: `${info.mutualidad} · ${info.porcentajeCotizacionMutual}%`, icon: ShieldCheck },
+            { label: 'Contacto consultas', value: info.contactoConsultas, icon: UserRound },
+            { label: 'Direccion', value: info.numeroLicitacion, icon: MapPin },
+            { label: 'Tipo de licitacion', value: info.tipoLicitacion, icon: ShieldCheck },
+            { label: 'Departamento de compra', value: `${info.departamentoCompra} · ${info.diasPlazoEvaluacion} dias evaluacion`, icon: ShieldCheck },
           ];
 
           return (
@@ -38,7 +38,7 @@ export function InfoClienteView() {
               <div className="mb-5 flex items-start justify-between gap-4">
                 <div>
                   <h2 className="text-xl font-semibold text-white">{proyecto.nombre}</h2>
-                  <p className="mt-1 text-sm text-slate-500">{proyecto.sistemaOrigen} · Go live {proyecto.fechaGoLive}</p>
+                  <p className="mt-1 text-sm text-slate-500">{proyecto.estadoLicitacion} · Go live {proyecto.fechaCierre}</p>
                 </div>
                 {puedeEditarProyectos ? (
                   <button className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-200 hover:bg-white/8" onClick={() => setSelected(proyecto)}>

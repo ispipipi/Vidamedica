@@ -4,7 +4,7 @@ export const GANTT_FRUTICOLA_SOURCE = {
   archivo: 'GANTT Implementacion REX+ Fruticola (1).xlsx',
   hoja: 'Carta_Gantt_Fruticola',
   generadoEn: '2026-05-24',
-  fechaInicio: '2026-04-15',
+  fechaPublicacion: '2026-04-15',
   fechaFin: '2026-07-23',
   filasOmitidasSinFecha: [
   {

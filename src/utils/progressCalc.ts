@@ -1,7 +1,7 @@
 import { Alerta, EstadoSemaforo, Tarea } from '../types';
 
 const hoyChile = () => new Date().toLocaleDateString('en-CA', { timeZone: 'America/Santiago' });
-const tareasActivas = (tareas: Tarea[]) => tareas.filter((task) => task.estado !== 'cancelada');
+const tareasActivas = (tareas: Tarea[]) => tareas.filter((task) => task.estado !== 'cancelada' && task.estado !== 'no_aplica');
 const tareasVencidas = (tareas: Tarea[]) => {
   const hoy = hoyChile();
   return tareasActivas(tareas).filter((task) => task.estado !== 'completada' && task.fechaFinPlan < hoy);

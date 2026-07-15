@@ -49,7 +49,7 @@ export function Header() {
 
     const proyectos = proyectosVisibles
       .filter((proyecto) =>
-        [proyecto.nombre, proyecto.rut, proyecto.razonSocial, proyecto.representanteLegal, proyecto.sistemaOrigen]
+        [proyecto.nombre, proyecto.rut, proyecto.razonSocial, proyecto.contactoConsultas, proyecto.estadoLicitacion]
           .some((value) => value.toLowerCase().includes(normalizedQuery)),
       )
       .slice(0, 5);
@@ -66,7 +66,7 @@ export function Header() {
 
     const clientes = proyectosVisibles
       .filter((proyecto) =>
-        [proyecto.razonSocial, proyecto.rut, proyecto.representanteLegal, proyecto.direccion]
+        [proyecto.razonSocial, proyecto.rut, proyecto.contactoConsultas, proyecto.numeroLicitacion]
           .some((value) => value.toLowerCase().includes(normalizedQuery)),
       )
       .slice(0, 4);
@@ -226,7 +226,7 @@ export function Header() {
                             >
                               <div className="min-w-0">
                                 <p className="truncate text-sm font-semibold text-white">{proyecto.razonSocial}</p>
-                                <p className="truncate text-xs text-slate-400">{proyecto.nombre} · {proyecto.representanteLegal}</p>
+                                <p className="truncate text-xs text-slate-400">{proyecto.nombre} · {proyecto.contactoConsultas}</p>
                               </div>
                               <Building2 className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" />
                             </button>

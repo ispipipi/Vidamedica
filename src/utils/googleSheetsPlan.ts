@@ -25,7 +25,7 @@ export type GoogleSheetPlanPayload = {
 export type ImportedPlan = {
   fases: Fase[];
   tareas: Tarea[];
-  fechaInicio: string;
+  fechaPublicacion: string;
   fechaFin: string;
   skipped: Array<{ row: number; reason: string; value: GoogleSheetPlanRow }>;
   correctedDates: Array<{ row: number; field: 'inicio' | 'fin'; from: string; to: string; value: GoogleSheetPlanRow }>;
@@ -248,13 +248,13 @@ export function parseGoogleSheetPlan(payload: GoogleSheetPlanPayload | GoogleShe
     if (fase.fechaFinPlan === '0000-01-01') fase.fechaFinPlan = fase.fechaInicioPlan;
   });
 
-  const fechaInicio = tareas.reduce((min, tarea) => (tarea.fechaInicioPlan < min ? tarea.fechaInicioPlan : min), '9999-12-31');
+  const fechaPublicacion = tareas.reduce((min, tarea) => (tarea.fechaInicioPlan < min ? tarea.fechaInicioPlan : min), '9999-12-31');
   const fechaFin = tareas.reduce((max, tarea) => (tarea.fechaFinPlan > max ? tarea.fechaFinPlan : max), '0000-01-01');
 
   return {
     fases: fasesConTareas,
     tareas,
-    fechaInicio: fechaInicio === '9999-12-31' ? new Date().toISOString().slice(0, 10) : fechaInicio,
+    fechaPublicacion: fechaPublicacion === '9999-12-31' ? new Date().toISOString().slice(0, 10) : fechaPublicacion,
     fechaFin: fechaFin === '0000-01-01' ? new Date().toISOString().slice(0, 10) : fechaFin,
     skipped,
     correctedDates,

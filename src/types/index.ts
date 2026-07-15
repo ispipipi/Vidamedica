@@ -1,6 +1,6 @@
-export type SistemaOrigen = 'Visma' | 'Meta4' | 'Talana' | 'Workday' | 'BUK' | 'Otro';
+export type EstadoLicitacion = 'Pendiente' | 'Vencida' | 'Atrasada' | 'No Lograda' | 'Adjudicada' | 'Desierta';
 
-export type EstadoTarea = 'pendiente' | 'en_proceso' | 'completada' | 'bloqueada' | 'cancelada';
+export type EstadoTarea = 'pendiente' | 'en_proceso' | 'completada' | 'bloqueada' | 'cancelada' | 'no_aplica';
 
 export type EstadoSemaforo = 'verde' | 'amarillo' | 'rojo';
 
@@ -66,16 +66,16 @@ export interface Proyecto {
   nombre: string;
   rut: string;
   razonSocial: string;
-  representanteLegal: string;
-  direccion: string;
-  cajaCompensacion: string;
-  mutualidad: string;
-  porcentajeCotizacionMutual: number;
-  sistemaOrigen: SistemaOrigen;
+  contactoConsultas: string;
+  numeroLicitacion: string;
+  tipoLicitacion: string;
+  departamentoCompra: string;
+  diasPlazoEvaluacion: number;
+  estadoLicitacion: EstadoLicitacion;
   ejecutivoId: string;
   supervisorId: string;
-  fechaInicio: string;
-  fechaGoLive: string;
+  fechaPublicacion: string;
+  fechaCierre: string;
   estado: 'activo' | 'completado' | 'pausado';
   observaciones: string;
   creadoEn: string;
@@ -240,7 +240,7 @@ export interface AppState {
   crearPerfilAcceso: (perfil: Omit<PerfilAcceso, 'id'> & { id?: string }) => void;
   actualizarPerfilAcceso: (id: string, cambios: Partial<PerfilAcceso>) => void;
   eliminarPerfilAcceso: (id: string) => void;
-  reemplazarPlanificacionProyecto: (proyectoId: string, fases: Fase[], tareas: Tarea[], usuario: string, fechas?: { fechaInicio?: string; fechaFin?: string }) => void;
+  reemplazarPlanificacionProyecto: (proyectoId: string, fases: Fase[], tareas: Tarea[], usuario: string, fechas?: { fechaPublicacion?: string; fechaFin?: string }) => void;
   desplazarCronogramaProyecto: (proyectoId: string, nuevaFechaInicio: string, usuario: string) => void;
   actualizarTarea: (id: string, cambios: Partial<Tarea>, usuario: string) => void;
   actualizarFechasGantt: (tareaId: string, inicio: string, fin: string) => void;

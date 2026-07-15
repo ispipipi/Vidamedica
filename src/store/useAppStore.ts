@@ -88,10 +88,10 @@ const asegurarPerfilesAccesoBase = (perfilesAcceso: AppState['perfilesAcceso']) 
   return faltantes.length ? [...perfilesAcceso, ...faltantes] : perfilesAcceso;
 };
 
-const generarPlanProyecto = (proyectoId: string, fechaInicio: string, responsable: string) => {
+const generarPlanProyecto = (proyectoId: string, fechaPublicacion: string, responsable: string) => {
   const fases: Fase[] = [];
   const tareas: Tarea[] = [];
-  let fechaCursor = parseISO(fechaInicio);
+  let fechaCursor = parseISO(fechaPublicacion);
 
   PLANTILLA_FASES.forEach((plantillaFase, fi) => {
     const faseId = makeId('fase');
@@ -294,8 +294,8 @@ export const useAppStore = create<AppState>()(
             p.id === proyectoId
               ? {
                   ...p,
-                  fechaInicio: fechas?.fechaInicio ?? p.fechaInicio,
-                  fechaGoLive: fechas?.fechaFin ?? p.fechaGoLive,
+                  fechaPublicacion: fechas?.fechaPublicacion ?? p.fechaPublicacion,
+                  fechaCierre: fechas?.fechaFin ?? p.fechaCierre,
                   observaciones: `${p.observaciones}\nPlanificacion sincronizada desde Google Sheets el ${new Date().toLocaleString('es-CL')}.`,
                 }
               : p,
@@ -313,7 +313,7 @@ export const useAppStore = create<AppState>()(
         const proyecto = proyectos.find((item) => item.id === proyectoId);
         if (!proyecto || !nuevaFechaInicio) return;
 
-        const diasDesfase = differenceInCalendarDays(parseISO(nuevaFechaInicio), parseISO(proyecto.fechaInicio));
+        const diasDesfase = differenceInCalendarDays(parseISO(nuevaFechaInicio), parseISO(proyecto.fechaPublicacion));
         if (!Number.isFinite(diasDesfase) || diasDesfase === 0) return;
 
         const personas = obtenerPersonasActivas({ perfiles, ejecutivos });
@@ -325,8 +325,8 @@ export const useAppStore = create<AppState>()(
             item.id === proyectoId
               ? {
                   ...item,
-                  fechaInicio: moverFecha(item.fechaInicio),
-                  fechaGoLive: moverFecha(item.fechaGoLive),
+                  fechaPublicacion: moverFecha(item.fechaPublicacion),
+                  fechaCierre: moverFecha(item.fechaCierre),
                   observaciones: `${item.observaciones}${item.observaciones ? '\n' : ''}Cronograma desplazado ${diasDesfase > 0 ? `+${diasDesfase}` : diasDesfase} día(s) el ${new Date().toLocaleString('es-CL')}.`,
                 }
               : item,
@@ -353,7 +353,7 @@ export const useAppStore = create<AppState>()(
                       {
                         fecha: timestamp,
                         campo: 'desplazamiento_cronograma',
-                        valorAnterior: proyecto.fechaInicio,
+                        valorAnterior: proyecto.fechaPublicacion,
                         valorNuevo: nuevaFechaInicio,
                         usuario,
                       },
@@ -444,7 +444,7 @@ export const useAppStore = create<AppState>()(
 
         const faseOrigen = fases.find((fase) => fase.id === tareaOrigen.faseId);
         const hoy = new Date();
-        const fechaInicio = format(hoy, 'yyyy-MM-dd');
+        const fechaPublicacion = format(hoy, 'yyyy-MM-dd');
         const fechaFin = format(addDays(hoy, 1), 'yyyy-MM-dd');
         const timestamp = hoy.toISOString();
         const comentarioBloqueo = {
@@ -468,7 +468,7 @@ export const useAppStore = create<AppState>()(
             .join('\n'),
           responsable: responsableCanonico,
           estado: 'pendiente',
-          fechaInicioPlan: fechaInicio,
+          fechaInicioPlan: fechaPublicacion,
           fechaFinPlan: fechaFin,
           duracionDias: 1,
           esMilestone: false,
@@ -703,7 +703,7 @@ export const useAppStore = create<AppState>()(
       crearProyecto: (p) => {
         const id = makeId('proyecto');
         const responsable = get().ejecutivos.find((e) => e.id === p.ejecutivoId)?.nombre ?? 'Sin asignar';
-        const plan = generarPlanProyecto(id, p.fechaInicio, responsable);
+        const plan = generarPlanProyecto(id, p.fechaPublicacion, responsable);
         set((s) => ({
           proyectos: [...s.proyectos, { ...p, id, creadoEn: new Date().toISOString() }],
           fases: [...s.fases, ...plan.fases],

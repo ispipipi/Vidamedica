@@ -33,7 +33,7 @@ export function GanttAdminView() {
   const [proyectoId, setProyectoId] = useState(proyectos[0]?.id ?? '');
   const [sheetUrl, setSheetUrl] = useState(fuenteGoogleSheetsUrl);
   const [syncState, setSyncState] = useState<{ loading: boolean; message: string; error: boolean }>({ loading: false, message: '', error: false });
-  const [fechaInicioProyecto, setFechaInicioProyecto] = useState(proyectos[0]?.fechaInicio ?? new Date().toISOString().slice(0, 10));
+  const [fechaInicioProyecto, setFechaInicioProyecto] = useState(proyectos[0]?.fechaPublicacion ?? new Date().toISOString().slice(0, 10));
 
   const fasesProyecto = useMemo(() => fases.filter((fase) => fase.proyectoId === proyectoId).sort((a, b) => a.orden - b.orden), [fases, proyectoId]);
   const tareasProyecto = useMemo(() => tareas.filter((tarea) => tarea.proyectoId === proyectoId).sort((a, b) => a.fechaInicioPlan.localeCompare(b.fechaInicioPlan)), [tareas, proyectoId]);
@@ -44,8 +44,8 @@ export function GanttAdminView() {
     nombre: '',
     responsable: ejecutivos.find((e) => e.perfil === 'artbpo_ejecutivo')?.nombre ?? '',
     estado: 'pendiente' as EstadoTarea,
-    fechaInicioPlan: proyecto?.fechaInicio ?? new Date().toISOString().slice(0, 10),
-    fechaFinPlan: proyecto?.fechaInicio ?? new Date().toISOString().slice(0, 10),
+    fechaInicioPlan: proyecto?.fechaPublicacion ?? new Date().toISOString().slice(0, 10),
+    fechaFinPlan: proyecto?.fechaPublicacion ?? new Date().toISOString().slice(0, 10),
     esMilestone: false,
   });
 
@@ -55,16 +55,16 @@ export function GanttAdminView() {
     setForm((s) => ({
       ...s,
       faseId: fasesProyecto[0]?.id ?? '',
-      fechaInicioPlan: proyecto?.fechaInicio ?? s.fechaInicioPlan,
-      fechaFinPlan: proyecto?.fechaInicio ?? s.fechaFinPlan,
+      fechaInicioPlan: proyecto?.fechaPublicacion ?? s.fechaInicioPlan,
+      fechaFinPlan: proyecto?.fechaPublicacion ?? s.fechaFinPlan,
     }));
   }, [fasesProyecto, proyecto]);
 
   useEffect(() => {
-    if (proyecto?.fechaInicio) {
-      setFechaInicioProyecto(proyecto.fechaInicio);
+    if (proyecto?.fechaPublicacion) {
+      setFechaInicioProyecto(proyecto.fechaPublicacion);
     }
-  }, [proyecto?.fechaInicio, proyectoId]);
+  }, [proyecto?.fechaPublicacion, proyectoId]);
 
   if (!puedeAdministrar) {
     return (
@@ -139,7 +139,7 @@ export function GanttAdminView() {
       }
 
       reemplazarPlanificacionProyecto(proyectoId, imported.fases, imported.tareas, usuarioActivo?.nombre ?? 'Administrador', {
-        fechaInicio: imported.fechaInicio,
+        fechaPublicacion: imported.fechaPublicacion,
         fechaFin: imported.fechaFin,
       });
       setFuenteGoogleSheetsUrl(sheetUrl.trim());
@@ -159,7 +159,7 @@ export function GanttAdminView() {
 
   const ajustarInicioProyecto = () => {
     if (!proyecto || !fechaInicioProyecto) return;
-    if (fechaInicioProyecto === proyecto.fechaInicio) {
+    if (fechaInicioProyecto === proyecto.fechaPublicacion) {
       setSyncState({ loading: false, message: 'La fecha de inicio ya coincide con la actual.', error: false });
       return;
     }
@@ -167,7 +167,7 @@ export function GanttAdminView() {
     desplazarCronogramaProyecto(proyecto.id, fechaInicioProyecto, usuarioActivo?.nombre ?? 'Administrador');
     setSyncState({
       loading: false,
-      message: `Cronograma desplazado desde ${proyecto.fechaInicio} hacia ${fechaInicioProyecto}. Se ajustaron fases, tareas y go live.`,
+      message: `Cronograma desplazado desde ${proyecto.fechaPublicacion} hacia ${fechaInicioProyecto}. Se ajustaron fases, tareas y go live.`,
       error: false,
     });
   };
@@ -211,10 +211,10 @@ export function GanttAdminView() {
             </button>
             <div className="grid gap-1 text-sm text-slate-400">
               <p>
-                Inicio actual: <span className="font-medium text-white">{proyecto.fechaInicio}</span>
+                Inicio actual: <span className="font-medium text-white">{proyecto.fechaPublicacion}</span>
               </p>
               <p>
-                Go live actual: <span className="font-medium text-white">{proyecto.fechaGoLive}</span>
+                Go live actual: <span className="font-medium text-white">{proyecto.fechaCierre}</span>
               </p>
               <p className="text-xs text-slate-500">
                 Al cambiar la fecha de inicio, se desplazan en bloque las fechas planificadas de fases, tareas y la fecha go live.

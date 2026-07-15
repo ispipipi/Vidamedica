@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
-import { Proyecto, SistemaOrigen } from '../../types';
+import { Proyecto, EstadoLicitacion } from '../../types';
 import { getClientInfo } from '../../utils/clientInfo';
 import { Drawer } from '../ui/Drawer';
 
@@ -9,7 +9,7 @@ type Props = {
   onClose: () => void;
 };
 
-const sistemas: SistemaOrigen[] = ['Visma', 'Meta4', 'Talana', 'Workday', 'BUK', 'Otro'];
+const sistemas: EstadoLicitacion[] = ['Pendiente', 'Vencida', 'Atrasada', 'No Lograda', 'Adjudicada', 'Desierta'];
 
 export function ProyectoEditDrawer({ proyecto, onClose }: Props) {
   const actualizarProyecto = useAppStore((s) => s.actualizarProyecto);
@@ -17,14 +17,14 @@ export function ProyectoEditDrawer({ proyecto, onClose }: Props) {
     nombre: '',
     rut: '',
     razonSocial: '',
-    representanteLegal: '',
-    direccion: '',
-    cajaCompensacion: '',
-    mutualidad: '',
-    porcentajeCotizacionMutual: 0,
-    sistemaOrigen: 'Visma' as SistemaOrigen,
-    fechaInicio: '',
-    fechaGoLive: '',
+    contactoConsultas: '',
+    numeroLicitacion: '',
+    tipoLicitacion: '',
+    departamentoCompra: '',
+    diasPlazoEvaluacion: 0,
+    estadoLicitacion: 'Pendiente' as EstadoLicitacion,
+    fechaPublicacion: '',
+    fechaCierre: '',
     estado: 'activo' as Proyecto['estado'],
     observaciones: '',
   });
@@ -36,14 +36,14 @@ export function ProyectoEditDrawer({ proyecto, onClose }: Props) {
       nombre: proyecto.nombre,
       rut: proyecto.rut,
       razonSocial: info.razonSocial,
-      representanteLegal: info.representanteLegal,
-      direccion: info.direccion,
-      cajaCompensacion: info.cajaCompensacion,
-      mutualidad: info.mutualidad,
-      porcentajeCotizacionMutual: info.porcentajeCotizacionMutual,
-      sistemaOrigen: proyecto.sistemaOrigen,
-      fechaInicio: proyecto.fechaInicio,
-      fechaGoLive: proyecto.fechaGoLive,
+      contactoConsultas: info.contactoConsultas,
+      numeroLicitacion: info.numeroLicitacion,
+      tipoLicitacion: info.tipoLicitacion,
+      departamentoCompra: info.departamentoCompra,
+      diasPlazoEvaluacion: info.diasPlazoEvaluacion,
+      estadoLicitacion: proyecto.estadoLicitacion,
+      fechaPublicacion: proyecto.fechaPublicacion,
+      fechaCierre: proyecto.fechaCierre,
       estado: proyecto.estado,
       observaciones: proyecto.observaciones,
     });
@@ -72,8 +72,8 @@ export function ProyectoEditDrawer({ proyecto, onClose }: Props) {
             <input className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.rut} onChange={(e) => setForm((s) => ({ ...s, rut: e.target.value }))} />
           </label>
           <label className="grid gap-2 text-sm text-slate-300">
-            Sistema origen
-            <select className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.sistemaOrigen} onChange={(e) => setForm((s) => ({ ...s, sistemaOrigen: e.target.value as SistemaOrigen }))}>
+            Estado licitacion
+            <select className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.estadoLicitacion} onChange={(e) => setForm((s) => ({ ...s, estadoLicitacion: e.target.value as EstadoLicitacion }))}>
               {sistemas.map((sistema) => (
                 <option key={sistema}>{sistema}</option>
               ))}
@@ -81,31 +81,31 @@ export function ProyectoEditDrawer({ proyecto, onClose }: Props) {
           </label>
           <label className="grid gap-2 text-sm text-slate-300">
             Inicio
-            <input type="date" className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.fechaInicio} onChange={(e) => setForm((s) => ({ ...s, fechaInicio: e.target.value }))} />
+            <input type="date" className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.fechaPublicacion} onChange={(e) => setForm((s) => ({ ...s, fechaPublicacion: e.target.value }))} />
           </label>
           <label className="grid gap-2 text-sm text-slate-300">
             Go live
-            <input type="date" className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.fechaGoLive} onChange={(e) => setForm((s) => ({ ...s, fechaGoLive: e.target.value }))} />
+            <input type="date" className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.fechaCierre} onChange={(e) => setForm((s) => ({ ...s, fechaCierre: e.target.value }))} />
           </label>
           <label className="grid gap-2 text-sm text-slate-300">
-            Representante legal
-            <input className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.representanteLegal} onChange={(e) => setForm((s) => ({ ...s, representanteLegal: e.target.value }))} />
+            Contacto consultas
+            <input className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.contactoConsultas} onChange={(e) => setForm((s) => ({ ...s, contactoConsultas: e.target.value }))} />
           </label>
           <label className="grid gap-2 text-sm text-slate-300">
             Direccion
-            <input className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.direccion} onChange={(e) => setForm((s) => ({ ...s, direccion: e.target.value }))} />
+            <input className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.numeroLicitacion} onChange={(e) => setForm((s) => ({ ...s, numeroLicitacion: e.target.value }))} />
           </label>
           <label className="grid gap-2 text-sm text-slate-300">
-            Caja de compensacion
-            <input className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.cajaCompensacion} onChange={(e) => setForm((s) => ({ ...s, cajaCompensacion: e.target.value }))} />
+            Tipo licitacion
+            <input className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.tipoLicitacion} onChange={(e) => setForm((s) => ({ ...s, tipoLicitacion: e.target.value }))} />
           </label>
           <label className="grid gap-2 text-sm text-slate-300">
-            Mutualidad
-            <input className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.mutualidad} onChange={(e) => setForm((s) => ({ ...s, mutualidad: e.target.value }))} />
+            Departamento de compra
+            <input className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.departamentoCompra} onChange={(e) => setForm((s) => ({ ...s, departamentoCompra: e.target.value }))} />
           </label>
           <label className="grid gap-2 text-sm text-slate-300">
-            % mutualidad
-            <input type="number" step="0.01" className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.porcentajeCotizacionMutual} onChange={(e) => setForm((s) => ({ ...s, porcentajeCotizacionMutual: Number(e.target.value) }))} />
+            % departamentoCompra
+            <input type="number" step="0.01" className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.diasPlazoEvaluacion} onChange={(e) => setForm((s) => ({ ...s, diasPlazoEvaluacion: Number(e.target.value) }))} />
           </label>
           <label className="grid gap-2 text-sm text-slate-300">
             Estado

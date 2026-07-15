@@ -22,6 +22,7 @@ const estadoLabels: Record<EstadoTarea, string> = {
   completada: 'Completada',
   bloqueada: 'Bloqueada',
   cancelada: 'Cancelada',
+  no_aplica: 'No aplica',
 };
 
 const colors: Record<EstadoTarea, string> = {
@@ -30,6 +31,7 @@ const colors: Record<EstadoTarea, string> = {
   completada: '#22c55e',
   bloqueada: '#ef4444',
   cancelada: '#71717a',
+  no_aplica: '#52525b',
 };
 
 export function Charts({ proyectos, tareas }: { proyectos: Proyecto[]; tareas: Tarea[] }) {
@@ -48,7 +50,7 @@ export function Charts({ proyectos, tareas }: { proyectos: Proyecto[]; tareas: T
   }));
 
   const linea = proyectos.map((p) => ({
-    name: p.fechaGoLive,
+    name: p.fechaCierre,
     avance: calcPctProyecto(p.id, tareas),
   }));
 

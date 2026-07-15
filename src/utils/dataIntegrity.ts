@@ -87,10 +87,10 @@ export const sanitizarProyecto = (proyecto: Proyecto): Proyecto => ({
   ...proyecto,
   nombre: trimOrFallback(proyecto.nombre, 'Proyecto sin nombre'),
   razonSocial: trimOrFallback(proyecto.razonSocial, proyecto.nombre),
-  representanteLegal: trimOrFallback(proyecto.representanteLegal, 'No informado'),
-  direccion: trimOrFallback(proyecto.direccion, 'No informada'),
-  cajaCompensacion: trimOrFallback(proyecto.cajaCompensacion, 'No informada'),
-  mutualidad: trimOrFallback(proyecto.mutualidad, 'No informada'),
+  contactoConsultas: trimOrFallback(proyecto.contactoConsultas, 'No informado'),
+  numeroLicitacion: trimOrFallback(proyecto.numeroLicitacion, 'No informada'),
+  tipoLicitacion: trimOrFallback(proyecto.tipoLicitacion, 'No informada'),
+  departamentoCompra: trimOrFallback(proyecto.departamentoCompra, 'No informada'),
   observaciones: proyecto.observaciones?.trim() ?? '',
 });
 

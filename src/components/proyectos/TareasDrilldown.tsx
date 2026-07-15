@@ -24,6 +24,7 @@ const estadoPrioridad: Record<Tarea['estado'], number> = {
   pendiente: 3,
   cancelada: 4,
   completada: 5,
+  no_aplica: 6,
 };
 const estadosOrden = ['vencida', 'bloqueada', 'en_proceso', 'pendiente', 'cancelada', 'completada'];
 const estadoLabels: Record<string, string> = {
@@ -40,6 +41,7 @@ const accionEstado: Record<Tarea['estado'], { next: Tarea['estado']; label: stri
   completada: { next: 'pendiente', label: 'Reabrir' },
   bloqueada: { next: 'en_proceso', label: 'Reactivar' },
   cancelada: { next: 'pendiente', label: 'Reabrir' },
+  no_aplica: { next: 'pendiente', label: 'Reabrir' },
 };
 
 const toggleSet = (set: Set<string>, id: string) => {
