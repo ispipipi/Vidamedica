@@ -1,24 +1,24 @@
-import { AlertTriangle, Building2, CalendarDays, Edit3, FolderArchive, LayoutGrid, ListChecks, TimerReset } from 'lucide-react';
+import { AlertTriangle, Building2, CalendarDays, Edit3, FolderArchive, ListChecks, NotebookPen } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { usePermisos } from '../../hooks/usePermisos';
 import { useAppStore, calcCumplimientoGanttProyecto, calcPctPlanificadoProyecto, calcPctProyecto, semaforoCumplimientoProyecto } from '../../store/useAppStore';
 import { Proyecto } from '../../types';
 import { getClientInfo } from '../../utils/clientInfo';
 import { AlertPanel } from '../layout/AlertPanel';
-import { GanttView } from '../gantt/GanttView';
 import { GlassCard } from '../ui/GlassCard';
 import { ProgressRing } from '../ui/ProgressRing';
 import { TrafficLightOrb } from '../ui/TrafficLightOrb';
 import { FaseCard } from './FaseCard';
 import { ProyectoExpediente } from './ProyectoExpediente';
+import { ProyectoBitacora } from './ProyectoBitacora';
 import { ProyectoEditDrawer } from './ProyectoEditDrawer';
 import { TareasList } from './TareasList';
 
-type Tab = 'tareas' | 'fases' | 'gantt' | 'expediente' | 'alertas';
+type Tab = 'checklist' | 'expediente' | 'bitacora' | 'alertas';
 
 export function ProyectoDetail() {
   const { proyectoActivoId, faseActivaId, proyectos, fases, tareas, setVista } = useAppStore();
-  const [tab, setTab] = useState<Tab>('fases');
+  const [tab, setTab] = useState<Tab>('checklist');
   const [editing, setEditing] = useState<Proyecto | null>(null);
   const { puedeEditarProyectos } = usePermisos();
   const proyecto = proyectos.find((p) => p.id === proyectoActivoId);
@@ -29,7 +29,7 @@ export function ProyectoDetail() {
 
   useEffect(() => {
     if (useAppStore.getState().tareaActivaId) {
-      setTab('tareas');
+      setTab('checklist');
     }
   }, [proyectoActivoId, faseActivaId]);
 
@@ -62,7 +62,7 @@ export function ProyectoDetail() {
         <div className="grid gap-6 lg:grid-cols-[1fr_160px] lg:items-center">
           <div>
             <div className="mb-4 flex flex-wrap items-center gap-3">
-              <TrafficLightOrb estado={estado} size="md" label={`Gantt ${cumplimiento}%`} />
+              <TrafficLightOrb estado={estado} size="md" label={`Plazos ${cumplimiento}%`} />
               <span className="rounded-full bg-white/8 px-3 py-1 text-sm text-slate-300">{proyecto.estadoLicitacion}</span>
               <span className="rounded-full bg-white/8 px-3 py-1 text-sm text-slate-300">{proyecto.estado}</span>
               <span className="rounded-full bg-white/8 px-3 py-1 text-sm text-slate-300">Plan a hoy {planificado}%</span>
@@ -93,11 +93,11 @@ export function ProyectoDetail() {
           <div className="grid grid-cols-2 gap-4 justify-self-start text-center lg:justify-self-end">
             <div>
               <ProgressRing value={cumplimiento} size={112} />
-              <p className="mt-2 text-xs text-slate-400">Cumplimiento Gantt</p>
+              <p className="mt-2 text-xs text-slate-400">Cumplimiento de plazos</p>
             </div>
             <div>
               <ProgressRing value={pct} size={112} />
-              <p className="mt-2 text-xs text-slate-400">% avance real</p>
+              <p className="mt-2 text-xs text-slate-400">% checklist completado</p>
             </div>
           </div>
         </div>
@@ -105,10 +105,9 @@ export function ProyectoDetail() {
 
       <div className="flex flex-wrap gap-2">
         {[
-          ['fases', LayoutGrid, 'Fases'],
-          ['tareas', ListChecks, 'Todas las tareas'],
-          ['gantt', TimerReset, 'Gantt'],
-          ['expediente', FolderArchive, 'Expediente'],
+          ['checklist', ListChecks, 'Checklist'],
+          ['expediente', FolderArchive, 'Documentos'],
+          ['bitacora', NotebookPen, 'Bitacora'],
           ['alertas', AlertTriangle, 'Alertas'],
         ].map(([id, Icon, label]) => (
           <button key={id as string} className={`inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium ${tab === id ? 'border-emerald-300/40 bg-emerald-300/12 text-emerald-100' : 'border-white/10 text-slate-300 hover:bg-white/8'}`} onClick={() => setTab(id as Tab)}>
@@ -125,22 +124,12 @@ export function ProyectoDetail() {
             <h2 className="text-2xl font-semibold text-white">{faseActiva.nombre}</h2>
           </div>
           <button className="rounded-lg border border-white/10 px-4 py-2 text-sm text-slate-300 hover:bg-white/8" onClick={() => setVista('proyecto', proyecto.id)}>
-            Ver todas las fases
+            Ver todo el checklist
           </button>
         </div>
       ) : null}
 
-      {tab === 'tareas' ? (
-        <div className="space-y-4">
-          <div className="flex items-center gap-2 text-slate-300">
-            <ListChecks className="h-5 w-5 text-emerald-300" />
-            {tareasFase.length} tareas {faseActiva ? 'en esta fase' : 'del proyecto'}
-          </div>
-          <TareasList tareas={tareasFase} />
-        </div>
-      ) : null}
-
-      {tab === 'fases' && !faseActiva ? (
+      {tab === 'checklist' && !faseActiva ? (
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {fasesProyecto.map((fase) => (
             <FaseCard key={fase.id} fase={fase} tareas={tareasProyecto} />
@@ -148,18 +137,18 @@ export function ProyectoDetail() {
         </div>
       ) : null}
 
-      {tab === 'fases' && faseActiva ? (
+      {tab === 'checklist' && faseActiva ? (
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-slate-300">
             <ListChecks className="h-5 w-5 text-emerald-300" />
-            {tareasFase.length} tareas en esta fase
+            {tareasFase.length} puntos de checklist en esta fase
           </div>
           <TareasList tareas={tareasFase} />
         </div>
       ) : null}
 
-      {tab === 'gantt' ? <GanttView tareas={tareasFase} /> : null}
       {tab === 'expediente' ? <ProyectoExpediente proyectoId={proyecto.id} /> : null}
+      {tab === 'bitacora' ? <ProyectoBitacora tareas={tareasProyecto} /> : null}
       {tab === 'alertas' ? <AlertPanel /> : null}
       <ProyectoEditDrawer proyecto={editing} onClose={() => setEditing(null)} />
     </div>

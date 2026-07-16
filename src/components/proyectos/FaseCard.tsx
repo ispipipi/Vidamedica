@@ -41,7 +41,7 @@ export function FaseCard({ fase, tareas }: Props) {
           <StatusBadge estado={estado} />
         </div>
         <div className="mb-2 flex items-center justify-between text-sm">
-          <span className="text-slate-400">Cumplimiento Gantt</span>
+          <span className="text-slate-400">Cumplimiento de plazos</span>
           <span className="font-semibold text-white">{cumplimiento}%</span>
         </div>
         <ProgressBar value={cumplimiento} tone={semaforo === 'rojo' ? 'red' : semaforo === 'amarillo' ? 'amber' : 'emerald'} />

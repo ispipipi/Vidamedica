@@ -103,7 +103,7 @@ export function DashboardView() {
                 </div>
               </div>
               <div className="flex flex-col items-center gap-4">
-                <TrafficLightOrb estado={estado} size="lg" label={`Gantt ${cumplimiento}%`} />
+                <TrafficLightOrb estado={estado} size="lg" label={`Plazos ${cumplimiento}%`} />
                 <ProgressRing value={avance} size={126} />
                 <p className="text-sm text-slate-400">% avance real</p>
               </div>
@@ -266,7 +266,7 @@ export function DashboardView() {
                   <TrafficLightOrb estado={semaforo} size="lg" />
                   <div>
                     <p className="text-2xl font-semibold text-white">{cumplimientoPromedio}%</p>
-                    <p className="text-sm text-slate-400">Cumplimiento Gantt</p>
+                    <p className="text-sm text-slate-400">Cumplimiento de plazos</p>
                   </div>
                 </div>
                 <div className="flex flex-col items-center gap-3">
@@ -322,7 +322,7 @@ export function DashboardView() {
                 </div>
                 <div className="mt-4 grid gap-2 text-sm">
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Cumplimiento Gantt</span>
+                    <span className="text-slate-400">Cumplimiento de plazos</span>
                     <span className="font-semibold text-white">{calcCumplimientoGanttProyecto(proyecto.id, tareas)}%</span>
                   </div>
                   <div className="flex items-center justify-between">
@@ -496,7 +496,7 @@ function DashboardKpiDetalle({
                     <div className="flex items-center gap-4">
                       <div className="hidden min-w-36 sm:block">
                         <div className="mb-1 flex justify-between text-xs">
-                          <span className="text-slate-500">Gantt</span>
+                          <span className="text-slate-500">Plazos</span>
                           <span className="font-semibold text-white">{cumplimiento}%</span>
                         </div>
                         <ProgressBar value={cumplimiento} tone={estado === 'rojo' ? 'red' : estado === 'amarillo' ? 'amber' : 'emerald'} />
@@ -545,7 +545,7 @@ function DashboardKpiDetalle({
                   <ArrowRight className="h-5 w-5 text-slate-500" />
                 </div>
                 <div className="mt-4 mb-2 flex items-center justify-between text-sm">
-                  <span className="text-slate-400">{isSemaforo ? 'Cumplimiento Gantt' : 'Cumplimiento fase'}</span>
+                  <span className="text-slate-400">{isSemaforo ? 'Cumplimiento de plazos' : 'Cumplimiento fase'}</span>
                   <span className="font-semibold text-white">{isSemaforo ? cumplimiento : pct}%</span>
                 </div>
                 <ProgressBar value={isSemaforo ? cumplimiento : pct} tone={isSemaforo ? (estado === 'rojo' ? 'red' : estado === 'amarillo' ? 'amber' : 'emerald') : pct === 100 ? 'emerald' : 'blue'} />

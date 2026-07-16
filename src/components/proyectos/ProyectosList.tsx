@@ -74,7 +74,7 @@ export function ProyectosList() {
 
                 <div className="mt-auto">
                   <div className="mb-2 flex items-center justify-between text-sm">
-                    <span className="text-slate-400">Cumplimiento Gantt</span>
+                    <span className="text-slate-400">Cumplimiento de plazos</span>
                     <span className="font-semibold text-white">{cumplimiento}%</span>
                   </div>
                   <ProgressBar value={cumplimiento} tone={estado === 'rojo' ? 'red' : estado === 'amarillo' ? 'amber' : 'emerald'} />
