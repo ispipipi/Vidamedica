@@ -602,7 +602,7 @@ export function TareasDrilldown({ tareas, showProjectLevel = true, query = '', s
                   <div className="min-w-0">
                     <p className="text-xs font-semibold uppercase tracking-[0.14em] text-emerald-300">{fase.codigo}</p>
                     <h3 className="truncate font-semibold text-white">{fase.nombre}</h3>
-                    <p className="mt-1 text-sm text-slate-500">{tareasFase.length} tarea(s)</p>
+                    <p className="mt-1 text-sm text-slate-500">{tareasFase.length} punto(s) de checklist</p>
                   </div>
                 </div>
                 <div className="hidden min-w-36 sm:block">
@@ -626,7 +626,7 @@ export function TareasDrilldown({ tareas, showProjectLevel = true, query = '', s
     return (
       <GlassCard className="p-6 text-center text-slate-400">
         <Search className="mx-auto mb-3 h-5 w-5 text-slate-500" />
-        No hay tareas para mostrar con los filtros actuales.
+        No hay puntos de checklist para mostrar con los filtros actuales.
       </GlassCard>
     );
   }
@@ -666,7 +666,7 @@ export function TareasDrilldown({ tareas, showProjectLevel = true, query = '', s
                   </div>
                   <div className="min-w-0">
                     <h2 className="truncate text-lg font-semibold text-white">{proyecto.nombre}</h2>
-                    <p className="mt-1 text-sm text-slate-500">{tareasProyecto.length} tarea(s) visibles</p>
+                    <p className="mt-1 text-sm text-slate-500">{tareasProyecto.length} punto(s) de checklist visibles</p>
                   </div>
                 </div>
                 <div className="hidden min-w-44 sm:block">
@@ -681,7 +681,7 @@ export function TareasDrilldown({ tareas, showProjectLevel = true, query = '', s
                 <div className="border-t border-white/10 p-4">
                   <div className="mb-3 flex items-center gap-2 text-sm font-medium text-slate-300">
                     <ListChecks className="h-4 w-4 text-emerald-300" />
-                    Fases y tareas
+                    Checklist
                   </div>
                   {renderPhases(proyecto.id)}
                 </div>

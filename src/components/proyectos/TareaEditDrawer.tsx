@@ -286,7 +286,7 @@ export function TareaEditDrawer({ tarea, onClose }: Props) {
   );
 
   return (
-    <Drawer open={!!tareaActual} title="Ficha de tarea" onClose={onClose}>
+    <Drawer open={!!tareaActual} title="Punto de checklist" onClose={onClose}>
       <div className="grid gap-4 xl:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.95fr)]">
         <div className="space-y-4">
           <section className="rounded-xl border border-white/10 bg-white/[0.035] p-4">

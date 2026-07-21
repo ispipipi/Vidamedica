@@ -155,12 +155,12 @@ export interface Alerta {
 }
 
 export type TipoDocumentoExpediente =
-  | 'Contrato'
-  | 'Mandato'
+  | 'Bases'
+  | 'Anexo administrativo'
+  | 'Anexo tecnico'
   | 'Certificado'
-  | 'Acta'
-  | 'Carga inicial'
-  | 'Legal'
+  | 'Boleta de garantia'
+  | 'Ficha tecnica'
   | 'Otro';
 
 export interface DocumentoExpediente {
@@ -171,6 +171,9 @@ export interface DocumentoExpediente {
   descripcion?: string;
   creadoPor: string;
   creadoEn: string;
+  origen?: 'archivo' | 'enlace';
+  mimeType?: string;
+  tamanoBytes?: number;
 }
 
 export type PortalAcceso =
