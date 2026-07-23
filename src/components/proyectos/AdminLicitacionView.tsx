@@ -5,7 +5,6 @@ import { usePermisos } from '../../hooks/usePermisos';
 import { useAppStore } from '../../store/useAppStore';
 import { EstadoTarea, Tarea } from '../../types';
 import { GoogleSheetPlanPayload, GoogleSheetPlanRow, normalizeGoogleSheetSourceUrl, parseGoogleSheetCsv, parseGoogleSheetPlan } from '../../utils/googleSheetsPlan';
-import { GanttView } from './GanttView';
 import { GlassCard } from '../ui/GlassCard';
 import { StatusBadge } from '../ui/StatusBadge';
 
@@ -13,7 +12,7 @@ const estados: EstadoTarea[] = ['pendiente', 'en_proceso', 'completada', 'bloque
 
 const calcDuracion = (inicio: string, fin: string) => Math.max(0, differenceInCalendarDays(parseISO(fin), parseISO(inicio)));
 
-export function GanttAdminView() {
+export function AdminLicitacionView() {
   const {
     proyectos,
     fases,
@@ -71,7 +70,7 @@ export function GanttAdminView() {
       <GlassCard className="p-6">
         <Lock className="mb-4 h-8 w-8 text-slate-500" />
         <h1 className="text-2xl font-semibold text-white">Acceso restringido</h1>
-        <p className="mt-2 text-slate-400">Solo Administrador y Cerebro Operacional pueden modificar la Gantt completa.</p>
+        <p className="mt-2 text-slate-400">Solo Administrador puede modificar la licitacion completa.</p>
       </GlassCard>
     );
   }
@@ -106,7 +105,7 @@ export function GanttAdminView() {
   };
 
   const deleteTask = (tarea: Tarea) => {
-    if (window.confirm(`Eliminar la tarea "${tarea.nombre}"?`)) {
+    if (window.confirm(`Eliminar el punto de checklist "${tarea.nombre}"?`)) {
       eliminarTarea(tarea.id);
     }
   };
@@ -177,7 +176,7 @@ export function GanttAdminView() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="text-sm uppercase tracking-[0.18em] text-emerald-300">Administracion</p>
-          <h1 className="mt-2 text-3xl font-semibold text-white">Gantt completa</h1>
+          <h1 className="mt-2 text-3xl font-semibold text-white">Administrar licitacion</h1>
           <p className="mt-2 text-slate-400">Vista de administrador para ajustar fechas, estados, responsables y estructura de tareas.</p>
         </div>
         <select className="min-w-72 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={proyectoId} onChange={(e) => setProyectoId(e.target.value)}>
@@ -268,10 +267,8 @@ export function GanttAdminView() {
         </div>
       </GlassCard>
 
-      <GanttView tareas={tareasProyecto} />
-
       <GlassCard className="p-5">
-        <h2 className="mb-4 text-xl font-semibold text-white">Agregar tarea</h2>
+        <h2 className="mb-4 text-xl font-semibold text-white">Agregar punto de checklist</h2>
         <form className="grid gap-3 lg:grid-cols-6" onSubmit={submit}>
           <select className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={currentFaseId} onChange={(e) => setForm((s) => ({ ...s, faseId: e.target.value }))}>
             {fasesProyecto.map((fase) => (
@@ -280,7 +277,7 @@ export function GanttAdminView() {
               </option>
             ))}
           </select>
-          <input className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white lg:col-span-2" placeholder="Nombre de tarea" value={form.nombre} onChange={(e) => setForm((s) => ({ ...s, nombre: e.target.value }))} />
+          <input className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white lg:col-span-2" placeholder="Nombre del punto de checklist" value={form.nombre} onChange={(e) => setForm((s) => ({ ...s, nombre: e.target.value }))} />
           <input className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" placeholder="Responsable" value={form.responsable} onChange={(e) => setForm((s) => ({ ...s, responsable: e.target.value }))} />
           <input type="date" className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.fechaInicioPlan} onChange={(e) => setForm((s) => ({ ...s, fechaInicioPlan: e.target.value }))} />
           <input type="date" className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white" value={form.fechaFinPlan} onChange={(e) => setForm((s) => ({ ...s, fechaFinPlan: e.target.value }))} />
@@ -304,14 +301,14 @@ export function GanttAdminView() {
 
       <GlassCard className="overflow-hidden">
         <div className="border-b border-white/10 p-5">
-          <h2 className="text-xl font-semibold text-white">Editar tareas</h2>
+          <h2 className="text-xl font-semibold text-white">Editar checklist</h2>
           <p className="mt-1 text-sm text-slate-500">Los cambios se guardan al modificar cada campo.</p>
         </div>
         <div className="overflow-x-auto scrollbar-thin">
           <table className="min-w-[1180px] w-full text-left">
             <thead className="bg-white/[0.035] text-xs uppercase tracking-[0.14em] text-slate-500">
               <tr>
-                <th className="px-4 py-3">Tarea</th>
+                <th className="px-4 py-3">Punto de checklist</th>
                 <th className="px-4 py-3">Fase</th>
                 <th className="px-4 py-3">Responsable</th>
                 <th className="px-4 py-3">Estado</th>

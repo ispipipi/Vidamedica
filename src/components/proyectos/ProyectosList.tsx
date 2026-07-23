@@ -1,7 +1,7 @@
 import { CalendarDays, Edit3, Plus, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { usePermisos, useProyectosVisibles } from '../../hooks/usePermisos';
-import { useAppStore, calcCumplimientoGanttProyecto, calcPctPlanificadoProyecto, calcPctProyecto, semaforoCumplimientoProyecto } from '../../store/useAppStore';
+import { useAppStore, calcCumplimientoPlazosProyecto, calcPctPlanificadoProyecto, calcPctProyecto, semaforoCumplimientoProyecto } from '../../store/useAppStore';
 import { Proyecto } from '../../types';
 import { GlassCard } from '../ui/GlassCard';
 import { ProgressBar } from '../ui/ProgressBar';
@@ -36,7 +36,7 @@ export function ProyectosList() {
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {proyectos.map((proyecto) => {
           const pct = calcPctProyecto(proyecto.id, tareas);
-          const cumplimiento = calcCumplimientoGanttProyecto(proyecto.id, tareas);
+          const cumplimiento = calcCumplimientoPlazosProyecto(proyecto.id, tareas);
           const planificado = calcPctPlanificadoProyecto(proyecto.id, tareas);
           const estado = semaforoCumplimientoProyecto(proyecto.id, tareas);
 

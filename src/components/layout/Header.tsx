@@ -8,7 +8,7 @@ import { Breadcrumb } from './Breadcrumb';
 
 export function Header() {
   const { usuarioActivo, setVista, setTareaActiva, setBusquedaTareas, tareas, fases, perfiles, ejecutivos } = useAppStore();
-  const { puedeAdministrar, puedeGestionarUsuarios, puedeVerGanttAdmin } = usePermisos();
+  const { puedeAdministrar, puedeGestionarUsuarios, puedeAdministrarLicitacion } = usePermisos();
   const proyectosVisibles = useProyectosVisibles();
   const [query, setQuery] = useState('');
   const [openSearch, setOpenSearch] = useState(false);
@@ -292,14 +292,14 @@ export function Header() {
             </button>
             <button className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-300 hover:bg-white/8" onClick={() => setVista('info_cliente')}>
               <Building2 className="h-4 w-4" />
-              Info cliente
+              Info organismo
             </button>
-            {puedeVerGanttAdmin || puedeGestionarUsuarios || puedeAdministrar ? (
+            {puedeAdministrarLicitacion || puedeGestionarUsuarios || puedeAdministrar ? (
               <>
-                {puedeVerGanttAdmin ? (
-                  <button className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-300 hover:bg-white/8" onClick={() => setVista('gantt_admin')}>
+                {puedeAdministrarLicitacion ? (
+                  <button className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-300 hover:bg-white/8" onClick={() => setVista('admin_licitacion')}>
                     <CalendarRange className="h-4 w-4" />
-                    Gantt admin
+                    Administrar licitacion
                   </button>
                 ) : null}
                 {puedeGestionarUsuarios || puedeAdministrar ? (

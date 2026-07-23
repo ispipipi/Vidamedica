@@ -3,8 +3,8 @@ import { useMemo, useState } from 'react';
 import { usePermisos, useProyectosVisibles } from '../../hooks/usePermisos';
 import {
   useAppStore,
-  calcCumplimientoGanttFase,
-  calcCumplimientoGanttProyecto,
+  calcCumplimientoPlazosFase,
+  calcCumplimientoPlazosProyecto,
   calcPctFase,
   calcPctPlanificadoFase,
   calcPctPlanificadoProyecto,
@@ -78,7 +78,7 @@ export function DashboardView() {
     const tareasProyecto = tareas.filter((t) => t.proyectoId === proyectoCliente.id);
     const fasesProyecto = fases.filter((f) => f.proyectoId === proyectoCliente.id).sort((a, b) => a.orden - b.orden);
     const avance = calcPctProyecto(proyectoCliente.id, tareas);
-    const cumplimiento = calcCumplimientoGanttProyecto(proyectoCliente.id, tareas);
+    const cumplimiento = calcCumplimientoPlazosProyecto(proyectoCliente.id, tareas);
     const estado = semaforoCumplimientoProyecto(proyectoCliente.id, tareas);
 
     return (
@@ -171,7 +171,7 @@ export function DashboardView() {
     ? Math.round(proyectos.reduce((acc, p) => acc + calcPctProyecto(p.id, tareas), 0) / proyectos.length)
     : 0;
   const cumplimientoPromedio = proyectos.length
-    ? Math.round(proyectos.reduce((acc, p) => acc + calcCumplimientoGanttProyecto(p.id, tareas), 0) / proyectos.length)
+    ? Math.round(proyectos.reduce((acc, p) => acc + calcCumplimientoPlazosProyecto(p.id, tareas), 0) / proyectos.length)
     : 100;
   const semaforo = proyectos.some((p) => semaforoCumplimientoProyecto(p.id, tareas) === 'rojo')
     ? 'rojo'
@@ -323,7 +323,7 @@ export function DashboardView() {
                 <div className="mt-4 grid gap-2 text-sm">
                   <div className="flex items-center justify-between">
                     <span className="text-slate-400">Cumplimiento de plazos</span>
-                    <span className="font-semibold text-white">{calcCumplimientoGanttProyecto(proyecto.id, tareas)}%</span>
+                    <span className="font-semibold text-white">{calcCumplimientoPlazosProyecto(proyecto.id, tareas)}%</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-slate-400">% avance real</span>
@@ -476,7 +476,7 @@ function DashboardKpiDetalle({
           {proyectosOrdenados.length ? (
             proyectosOrdenados.map((item) => {
               const estado = semaforoCumplimientoProyecto(item.id, tareas);
-              const cumplimiento = calcCumplimientoGanttProyecto(item.id, tareas);
+              const cumplimiento = calcCumplimientoPlazosProyecto(item.id, tareas);
               const avance = calcPctProyecto(item.id, tareas);
               const planificado = calcPctPlanificadoProyecto(item.id, tareas);
               const alertasProyecto = alertas.filter((alerta) => alerta.proyectoId === item.id);
@@ -526,7 +526,7 @@ function DashboardKpiDetalle({
             const count = kpi === 'alertas' ? alertasFaseItem.length : tareasFaseItem.length;
             const pct = calcPctFase(item.id, tareas);
             const estado = semaforoCumplimientoFase(item.id, tareas);
-            const cumplimiento = calcCumplimientoGanttFase(item.id, tareas);
+            const cumplimiento = calcCumplimientoPlazosFase(item.id, tareas);
             const planificado = calcPctPlanificadoFase(item.id, tareas);
             const isSemaforo = kpi === 'semaforo';
 

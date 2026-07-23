@@ -1,6 +1,6 @@
 import { Calendar, ChevronRight } from 'lucide-react';
 import { Fase, Tarea } from '../../types';
-import { useAppStore, calcCumplimientoGanttFase, calcPctFase, calcPctPlanificadoFase, semaforoCumplimientoFase } from '../../store/useAppStore';
+import { useAppStore, calcCumplimientoPlazosFase, calcPctFase, calcPctPlanificadoFase, semaforoCumplimientoFase } from '../../store/useAppStore';
 import { GlassCard } from '../ui/GlassCard';
 import { ProgressBar } from '../ui/ProgressBar';
 import { StatusBadge } from '../ui/StatusBadge';
@@ -14,7 +14,7 @@ type Props = {
 export function FaseCard({ fase, tareas }: Props) {
   const setVista = useAppStore((s) => s.setVista);
   const pct = calcPctFase(fase.id, tareas);
-  const cumplimiento = calcCumplimientoGanttFase(fase.id, tareas);
+  const cumplimiento = calcCumplimientoPlazosFase(fase.id, tareas);
   const planificado = calcPctPlanificadoFase(fase.id, tareas);
   const semaforo = semaforoCumplimientoFase(fase.id, tareas);
   const tareasFase = tareas.filter((t) => t.faseId === fase.id);

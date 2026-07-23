@@ -38,7 +38,7 @@ export const calcPctPlanificadoFase = (faseId: string, tareas: Tarea[]) => {
   return Math.round((t.filter((task) => task.fechaFinPlan <= hoy).length / t.length) * 100);
 };
 
-export const calcCumplimientoGanttProyecto = (proyectoId: string, tareas: Tarea[]) => {
+export const calcCumplimientoPlazosProyecto = (proyectoId: string, tareas: Tarea[]) => {
   const hoy = hoyChile();
   const vencibles = tareasActivas(tareas.filter((task) => task.proyectoId === proyectoId && task.fechaFinPlan <= hoy));
   if (!vencibles.length) return 100;
@@ -46,7 +46,7 @@ export const calcCumplimientoGanttProyecto = (proyectoId: string, tareas: Tarea[
   return Math.round((cumplidas.length / vencibles.length) * 100);
 };
 
-export const calcCumplimientoGanttFase = (faseId: string, tareas: Tarea[]) => {
+export const calcCumplimientoPlazosFase = (faseId: string, tareas: Tarea[]) => {
   const hoy = hoyChile();
   const vencibles = tareasActivas(tareas.filter((task) => task.faseId === faseId && task.fechaFinPlan <= hoy));
   if (!vencibles.length) return 100;

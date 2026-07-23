@@ -26,7 +26,7 @@ export function AjustesView() {
       ...base,
       { id: 'proyectos' as const, label: 'Mantenedor licitaciones', description: 'Organismos y licitaciones', icon: BriefcaseBusiness },
       { id: 'ejecutivos' as const, label: 'Mantenedor equipo', description: 'Responsables internos', icon: UserCog },
-      { id: 'plantilla' as const, label: 'Plantilla Gantt', description: 'Fases y tareas base', icon: ClipboardList },
+      { id: 'plantilla' as const, label: 'Plantilla de licitacion', description: 'Fases y checklist base', icon: ClipboardList },
     ];
   }, [puedeAdministrar]);
 

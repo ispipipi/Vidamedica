@@ -13,7 +13,7 @@ export function Breadcrumb() {
     fase ? { label: fase.codigo, onClick: () => setVista('fase', proyecto?.id, fase.id) } : null,
     vista === 'mis_tareas' ? { label: 'Mis tareas', onClick: () => setVista('mis_tareas') } : null,
     vista === 'info_cliente' ? { label: 'Info organismo', onClick: () => setVista('info_cliente', proyecto?.id) } : null,
-    vista === 'gantt_admin' ? { label: 'Gantt admin', onClick: () => setVista('gantt_admin') } : null,
+    vista === 'admin_licitacion' ? { label: 'Administrar licitacion', onClick: () => setVista('admin_licitacion') } : null,
     vista === 'ajustes' ? { label: 'Ajustes', onClick: () => setVista('ajustes') } : null,
   ].filter(Boolean) as Array<{ label: string; onClick: () => void }>;
 

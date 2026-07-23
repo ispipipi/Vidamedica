@@ -1,7 +1,7 @@
 import { AlertTriangle, Building2, CalendarDays, Edit3, FolderArchive, ListChecks, NotebookPen } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { usePermisos } from '../../hooks/usePermisos';
-import { useAppStore, calcCumplimientoGanttProyecto, calcPctPlanificadoProyecto, calcPctProyecto, semaforoCumplimientoProyecto } from '../../store/useAppStore';
+import { useAppStore, calcCumplimientoPlazosProyecto, calcPctPlanificadoProyecto, calcPctProyecto, semaforoCumplimientoProyecto } from '../../store/useAppStore';
 import { Proyecto } from '../../types';
 import { getClientInfo } from '../../utils/clientInfo';
 import { AlertPanel } from '../layout/AlertPanel';
@@ -51,7 +51,7 @@ export function ProyectoDetail() {
   }
 
   const pct = calcPctProyecto(proyecto.id, tareas);
-  const cumplimiento = calcCumplimientoGanttProyecto(proyecto.id, tareas);
+  const cumplimiento = calcCumplimientoPlazosProyecto(proyecto.id, tareas);
   const planificado = calcPctPlanificadoProyecto(proyecto.id, tareas);
   const estado = semaforoCumplimientoProyecto(proyecto.id, tareas);
   const info = getClientInfo(proyecto);

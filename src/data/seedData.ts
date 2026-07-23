@@ -1,4 +1,4 @@
-import { Ejecutivo, Proyecto, Fase, Tarea } from '../types';
+import { Ejecutivo, Proyecto, Fase, Tarea, DocumentoExpediente, AccesoCompania } from '../types';
 
 export const EJECUTIVOS_SEED: Ejecutivo[] = [
   {
@@ -1565,3 +1565,147 @@ export const PROYECTOS_PENDIENTES_SYNC: LicitacionPendienteSync[] = [
   ]
 },
 ];
+
+// --- Documentos ficticios de ejemplo para poblar el expediente de cada licitacion ---
+export const EXPEDIENTES_SEED: Record<string, { documentos: DocumentoExpediente[]; accesos: AccesoCompania[] }> = {
+  "jeringas-sotero-id": {
+    "documentos": [
+      {
+        "id": "doc-jer-1",
+        "nombre": "Bases Licitacion 1057501-172-LP26",
+        "tipo": "Bases",
+        "url": "https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion=1057501-172-LP26",
+        "descripcion": "Bases administrativas, tecnicas y anexos del Convenio Jeringas Varias.",
+        "creadoPor": "Isaac",
+        "creadoEn": "2026-07-01T10:00:00Z",
+        "origen": "enlace"
+      },
+      {
+        "id": "doc-jer-2",
+        "nombre": "Anexo 1 - Identificacion del Proponente",
+        "tipo": "Anexo administrativo",
+        "url": "https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion=1057501-172-LP26",
+        "descripcion": "Datos del oferente, representante legal y contactos.",
+        "creadoPor": "Isaac",
+        "creadoEn": "2026-07-01T10:05:00Z",
+        "origen": "enlace"
+      },
+      {
+        "id": "doc-jer-3",
+        "nombre": "Anexo 5 - Calidad Tecnica de los Insumos",
+        "tipo": "Anexo tecnico",
+        "url": "https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion=1057501-172-LP26",
+        "descripcion": "Criterios tecnicos ponderacion 25%: CE Mark, FDA, ficha tecnica.",
+        "creadoPor": "Isaac",
+        "creadoEn": "2026-07-02T09:00:00Z",
+        "origen": "enlace"
+      },
+      {
+        "id": "doc-jer-4",
+        "nombre": "Anexo 6 - Pauta de Evaluacion",
+        "tipo": "Anexo tecnico",
+        "url": "https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion=1057501-172-LP26",
+        "descripcion": "Pauta de evaluacion de muestras por linea licitada.",
+        "creadoPor": "Isaac",
+        "creadoEn": "2026-07-02T09:10:00Z",
+        "origen": "enlace"
+      },
+      {
+        "id": "doc-jer-5",
+        "nombre": "Anexo 9 - Declaracion Jurada Ausencia de Retiros",
+        "tipo": "Anexo administrativo",
+        "url": "https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion=1057501-172-LP26",
+        "descripcion": "Declaracion jurada simple de ausencia de retiros de mercado.",
+        "creadoPor": "Isaac",
+        "creadoEn": "2026-07-03T11:00:00Z",
+        "origen": "enlace"
+      },
+      {
+        "id": "doc-jer-6",
+        "nombre": "Certificado FDA - lineas insulina",
+        "tipo": "Certificado",
+        "url": "https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion=1057501-172-LP26",
+        "descripcion": "Certificado FDA de jeringas de insulina, vencido, pendiente de renovacion.",
+        "creadoPor": "Isaac",
+        "creadoEn": "2026-07-05T14:00:00Z",
+        "origen": "enlace"
+      }
+    ],
+    "accesos": []
+  },
+  "reactivos-parral-id": {
+    "documentos": [
+      {
+        "id": "doc-rea-1",
+        "nombre": "Bases Licitacion 1464-47-LE26",
+        "tipo": "Bases",
+        "url": "https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion=1464-47-LE26",
+        "descripcion": "Bases administrativas y tecnicas Reactivos Laboratorio 2026.",
+        "creadoPor": "Isaac",
+        "creadoEn": "2026-07-08T16:30:00Z",
+        "origen": "enlace"
+      },
+      {
+        "id": "doc-rea-2",
+        "nombre": "Anexo 1 - Identificacion del Proponente",
+        "tipo": "Anexo administrativo",
+        "url": "https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion=1464-47-LE26",
+        "descripcion": "Datos del oferente.",
+        "creadoPor": "Isaac",
+        "creadoEn": "2026-07-08T16:35:00Z",
+        "origen": "enlace"
+      },
+      {
+        "id": "doc-rea-3",
+        "nombre": "Ficha tecnica reactivos - cadena de frio",
+        "tipo": "Ficha tecnica",
+        "url": "https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion=1464-47-LE26",
+        "descripcion": "Especificaciones de almacenaje y transporte refrigerado.",
+        "creadoPor": "Isaac",
+        "creadoEn": "2026-07-09T09:00:00Z",
+        "origen": "enlace"
+      }
+    ],
+    "accesos": []
+  },
+  "insumos-neurocirugia-id": {
+    "documentos": [
+      {
+        "id": "doc-neu-1",
+        "nombre": "Bases Licitacion 1058086-34-LP26",
+        "tipo": "Bases",
+        "url": "https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion=1058086-34-LP26",
+        "descripcion": "Bases administrativas y tecnicas suministro de insumos.",
+        "creadoPor": "Isaac",
+        "creadoEn": "2026-07-08T15:30:00Z",
+        "origen": "enlace"
+      },
+      {
+        "id": "doc-neu-2",
+        "nombre": "Anexo 1 - Identificacion del Proponente",
+        "tipo": "Anexo administrativo",
+        "url": "https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion=1058086-34-LP26",
+        "descripcion": "Datos del oferente.",
+        "creadoPor": "Isaac",
+        "creadoEn": "2026-07-08T15:35:00Z",
+        "origen": "enlace"
+      }
+    ],
+    "accesos": []
+  },
+  "apositos-sotero-id": {
+    "documentos": [
+      {
+        "id": "doc-apo-1",
+        "nombre": "Bases Licitacion 1057501-420-LP26",
+        "tipo": "Bases",
+        "url": "https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion=1057501-420-LP26",
+        "descripcion": "Bases administrativas y tecnicas Convenio Apositos Simples III.",
+        "creadoPor": "Katherine",
+        "creadoEn": "2026-07-08T16:25:00Z",
+        "origen": "enlace"
+      }
+    ],
+    "accesos": []
+  }
+};

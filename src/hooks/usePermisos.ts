@@ -16,7 +16,7 @@ export const usePermisos = () => {
     puedeEditarProyectos: accesos?.puedeEditarProyectos ?? perfil === 'artbpo_admin',
     puedeAdministrar: accesos?.puedeAdministrar ?? perfil === 'artbpo_admin',
     puedeGestionarUsuarios: accesos?.puedeGestionarUsuarios ?? perfil === 'artbpo_admin',
-    puedeVerGanttAdmin: accesos?.puedeVerGanttAdmin ?? perfil === 'artbpo_admin',
+    puedeAdministrarLicitacion: accesos?.puedeAdministrarLicitacion ?? perfil === 'artbpo_admin',
     esAdmin: accesos?.puedeAdministrar ?? perfil === 'artbpo_admin',
     esEjecutivo: perfil === 'artbpo_ejecutivo',
     esTMF: perfil === 'tmf',

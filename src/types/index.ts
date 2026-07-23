@@ -38,7 +38,7 @@ export interface AccesosPerfil {
   puedeEditarProyectos: boolean;
   puedeEditarDatosTarea: boolean;
   puedeCambiarEstadoTarea: boolean;
-  puedeVerGanttAdmin: boolean;
+  puedeAdministrarLicitacion: boolean;
   puedeGestionarUsuarios: boolean;
   soloLectura: boolean;
   esCliente: boolean;
@@ -202,7 +202,7 @@ export interface ExpedienteProyecto {
   accesos: AccesoCompania[];
 }
 
-export type Vista = 'dashboard' | 'proyectos' | 'proyecto' | 'fase' | 'mis_tareas' | 'info_cliente' | 'gantt_admin' | 'ajustes';
+export type Vista = 'dashboard' | 'proyectos' | 'proyecto' | 'fase' | 'mis_tareas' | 'info_cliente' | 'admin_licitacion' | 'ajustes';
 
 export interface AppState {
   usuarioActivo: UsuarioActivo | null;
@@ -251,7 +251,7 @@ export interface AppState {
   reemplazarPlanificacionProyecto: (proyectoId: string, fases: Fase[], tareas: Tarea[], usuario: string, fechas?: { fechaPublicacion?: string; fechaFin?: string }) => void;
   desplazarCronogramaProyecto: (proyectoId: string, nuevaFechaInicio: string, usuario: string) => void;
   actualizarTarea: (id: string, cambios: Partial<Tarea>, usuario: string) => void;
-  actualizarFechasGantt: (tareaId: string, inicio: string, fin: string) => void;
+  actualizarFechasPlan: (tareaId: string, inicio: string, fin: string) => void;
   crearTarea: (t: Omit<Tarea, 'id' | 'actualizadoEn' | 'historial'>) => void;
   reportarImpedimentoTarea: (payload: {
     tareaOrigenId: string;

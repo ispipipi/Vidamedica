@@ -2,14 +2,14 @@ import { addDays, differenceInCalendarDays, differenceInDays, format, parseISO }
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { PLANTILLA_FASES } from '../data/plantillaFases';
-import { SEED_DATA, PROYECTOS_PENDIENTES_SYNC } from '../data/seedData';
+import { SEED_DATA, PROYECTOS_PENDIENTES_SYNC, EXPEDIENTES_SEED } from '../data/seedData';
 import { PERFILES_ACCESO_SEED, PERFILES_SEED } from '../data/perfiles';
 import { GOOGLE_SHEETS_GANTT_URL } from '../data/googleSheetsSource';
 import { Alerta, AppState, ExpedienteProyecto, Fase, Tarea } from '../types';
 import { saveWorkspaceState } from '../services/remoteState';
 import {
-  calcCumplimientoGanttFase,
-  calcCumplimientoGanttProyecto,
+  calcCumplimientoPlazosFase,
+  calcCumplimientoPlazosProyecto,
   calcPctFase,
   calcPctPlanificadoFase,
   calcPctPlanificadoProyecto,
@@ -147,7 +147,7 @@ export const useAppStore = create<AppState>()(
       fases: SEED_DATA.fases,
       tareas: SEED_DATA.tareas,
       alertas: [],
-      expedientes: {},
+      expedientes: EXPEDIENTES_SEED,
       vista: 'dashboard',
       proyectoActivoId: null,
       faseActivaId: null,
@@ -404,7 +404,7 @@ export const useAppStore = create<AppState>()(
         guardarRemoto(get(), 'actualizar_tarea');
       },
 
-      actualizarFechasGantt: (tareaId, inicio, fin) => {
+      actualizarFechasPlan: (tareaId, inicio, fin) => {
         set((s) => ({
           tareas: s.tareas.map((t) =>
             t.id === tareaId
@@ -413,7 +413,7 @@ export const useAppStore = create<AppState>()(
           ),
         }));
         get().recalcularAlertas();
-        guardarRemoto(get(), 'actualizar_fechas_gantt');
+        guardarRemoto(get(), 'actualizar_fechas_plan');
       },
 
       crearTarea: (t) => {
@@ -739,6 +739,14 @@ export const useAppStore = create<AppState>()(
           proyectos: [...s.proyectos, ...proyectosNuevos],
           fases: [...s.fases, ...fasesNuevas],
           tareas: [...s.tareas, ...tareasNuevas],
+          expedientes: {
+            ...s.expedientes,
+            ...Object.fromEntries(
+              nuevos
+                .filter((item) => EXPEDIENTES_SEED[item.proyecto.id])
+                .map((item) => [item.proyecto.id, EXPEDIENTES_SEED[item.proyecto.id]]),
+            ),
+          },
           proyectosPendientesSyncCount: Math.max(0, s.proyectosPendientesSyncCount - nuevos.length),
           sincronizandoGES: false,
         }));
@@ -892,7 +900,7 @@ export const useAppStore = create<AppState>()(
               proyectoId: tarea.proyectoId,
               tareaId: tarea.id,
               tipo: 'vencida',
-              mensaje: `Incumplimiento Gantt: tarea vencida hace ${Math.abs(diasDif)} día(s): ${tarea.nombre}`,
+              mensaje: `Incumplimiento de plazo: item vencido hace ${Math.abs(diasDif)} día(s): ${tarea.nombre}`,
             });
           } else if (diasDif <= diasAnticipacionAlerta) {
             agregarAlerta({
@@ -900,7 +908,7 @@ export const useAppStore = create<AppState>()(
               proyectoId: tarea.proyectoId,
               tareaId: tarea.id,
               tipo: 'proxima_vencer',
-              mensaje: `Riesgo Gantt: vence en ${diasDif} día(s): ${tarea.nombre}`,
+              mensaje: `Riesgo de plazo: vence en ${diasDif} día(s): ${tarea.nombre}`,
             });
           }
 
@@ -910,7 +918,7 @@ export const useAppStore = create<AppState>()(
               proyectoId: tarea.proyectoId,
               tareaId: tarea.id,
               tipo: 'en_riesgo',
-              mensaje: `Riesgo Gantt: debio iniciar hace ${Math.abs(diasInicio)} día(s): ${tarea.nombre}`,
+              mensaje: `Riesgo de plazo: debio iniciar hace ${Math.abs(diasInicio)} día(s): ${tarea.nombre}`,
             });
           }
 
@@ -920,7 +928,7 @@ export const useAppStore = create<AppState>()(
               proyectoId: tarea.proyectoId,
               tareaId: tarea.id,
               tipo: 'bloqueada',
-              mensaje: `Incumplimiento Gantt: tarea bloqueada: ${tarea.nombre}`,
+              mensaje: `Incumplimiento de plazo: item bloqueado: ${tarea.nombre}`,
             });
           }
 
@@ -1009,8 +1017,8 @@ export const useAppStore = create<AppState>()(
 );
 
 export {
-  calcCumplimientoGanttFase,
-  calcCumplimientoGanttProyecto,
+  calcCumplimientoPlazosFase,
+  calcCumplimientoPlazosProyecto,
   calcPctFase,
   calcPctPlanificadoFase,
   calcPctPlanificadoProyecto,
